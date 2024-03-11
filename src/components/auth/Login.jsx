@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import axios from 'a';
-import Logo from '../main/Logo';
-import Link from 'react-router-dom';
+import axios from 'axios';
+import { Logo } from '../main/Logo';
+import { Link } from 'react-router-dom';
 
 export function Login() {
   const [inputs, setInputs] = useState({
@@ -52,8 +52,7 @@ export function Login() {
         <div id="login-page">
           <div id="login">
             <div id="welcome">
-              <strong> 어서오세요!</strong>
-              공유 배달 시스템 '이화 공유배달'에 오신 것을 환영합니다.
+              <strong> 학교 이메일로 로그인하세요 </strong>
             </div>
             <div id="login-register">
               <form id="id-pw" onSubmit={handleSubmit}>
@@ -62,7 +61,7 @@ export function Login() {
                   id="id"
                   type="text"
                   name="email"
-                  placeholder="@ewhain.net"
+                  placeholder="이메일"
                   value={email}
                   onChange={handleInputChange}
                 />
@@ -76,13 +75,15 @@ export function Login() {
                   onChange={handleInputChange}
                 />
                 {!success && <span>아이디 또는 비밀번호를 확인하세요.</span>}
-                <button type="submit" id="login-button">
+                <button type="submit" id="login-register-button">
                   로그인
                 </button>
+                <Link to="/signup">
+                  <button type="submit" id="login-register-button">
+                    회원가입
+                  </button>
+                </Link>
               </form>
-              <Link to="/register" id="register-button">
-                <p>아직 계정이 없으신가요?</p> <div id="green">회원가입</div>
-              </Link>
             </div>
           </div>
         </div>

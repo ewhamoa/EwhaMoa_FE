@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Logo } from '../header';
-import { BankOptions } from './BankOptions';
+import { Logo } from '../main/Logo';
 import axios from 'axios';
 
 export const Register = () => {
@@ -17,6 +16,7 @@ export const Register = () => {
   const [emailValid, setEmailValid] = useState(true);
   const [emailExists, setEmailExists] = useState(true);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [nickname, setNick] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -41,14 +41,15 @@ export const Register = () => {
     try {
       const response = await axios.post('/signup', formData);
 
-      setIsSnackbarOpen(true); // 회원가입 성공 시 스낵바 열기
-      sessionStorage.setItem('userId', response.data);
+      setIsSnackbarOpen(true);
+      sessionStorage.setItem('userId', response.data.userId);
       sessionStorage.setItem('IsRegistered', true);
+      setNick(response.data.nickname);
 
       setTimeout(() => {
-        setIsSnackbarOpen(false); // 일정 시간 후 스낵바 닫기
-      }, 3000); // 3초 후에 자동으로 닫힘
-      navigate('/');
+        setIsSnackbarOpen(false);
+        navigate('/');
+      }, 3000);
     } catch (error) {
       setEmailExists(error.response.data !== '이미 존재하는 이메일입니다.');
       setEmailValid(error.response.data !== '유효하지 않은 이메일입니다.');
@@ -103,9 +104,9 @@ export const Register = () => {
       {isSnackbarOpen && (
         <div className="snackbar">
           <button onClick={handleSnackbarClose} id="x">
-            X
+            x
           </button>
-          회원가입에 성공했습니다.
+          {nickname}님, 환영합니다.
         </div>
       )}
     </>
