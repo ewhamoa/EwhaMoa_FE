@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Logo } from '../main/Logo';
 import { Link } from 'react-router-dom';
+import './Auth.css';
 
 export function Login() {
   const [inputs, setInputs] = useState({
@@ -75,11 +76,11 @@ export function Login() {
                   onChange={handleInputChange}
                 />
                 {!success && <span>아이디 또는 비밀번호를 확인하세요.</span>}
-                <button type="submit" id="login-register-button">
+                <button type="submit" className="login-register-button">
                   로그인
                 </button>
                 <Link to="/signup">
-                  <button type="submit" id="login-register-button">
+                  <button type="submit" className="login-register-button" id="register-button">
                     회원가입
                   </button>
                 </Link>
@@ -88,9 +89,7 @@ export function Login() {
           </div>
         </div>
       </div>
-      <div id="login-right">
-        <img src="/assets/login-right-img.svg" id="login-right-img" alt="Login" />
-      </div>
+      <div id="login-right"></div>
     </div>
   );
 }
