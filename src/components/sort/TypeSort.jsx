@@ -40,45 +40,47 @@ export function TypeSort({ onSelect }) {
         <p>소속</p> <img src="/arrow.svg" />
       </div>
       {modalOpen && (
-        <div ref={modalRef}>
-          {ClubType.map(({ id, type }) => (
-            <div
-              onClick={() => handleTypeClick(id)}
-              className={selectedType === id ? 'selected' : ''}
-              id="clickAvailable"
-              key={id}>
-              <p>{type}</p>
-            </div>
-          ))}
-        </div>
-      )}
+        <>
+          <div ref={modalRef}>
+            {ClubType.map(({ id, type }) => (
+              <div
+                onClick={() => handleTypeClick(id)}
+                className={selectedType === id ? 'selected' : ''}
+                id="clickAvailable"
+                key={id}>
+                <p>{type}</p>
+              </div>
+            ))}
+          </div>
 
-      {selectedType === 1 ? (
-        <div>
-          {Majors.map(major => (
-            <div
-              onClick={() => handleTypeClick(major)}
-              className={selectedType === major ? 'selected' : ''}
-              id="clickAvailable"
-              key={major}>
-              <p>{major}</p>
+          {selectedType === 1 ? (
+            <div>
+              {Majors.map(major => (
+                <div
+                  onClick={() => handleTypeClick(major)}
+                  className={selectedType === major ? 'selected' : ''}
+                  id="clickAvailable"
+                  key={major}>
+                  <p>{major}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      ) : null}
-      {selectedType === 2 ? (
-        <div>
-          {Dept.map(dept => (
-            <div
-              onClick={() => handleTypeClick(dept)}
-              className={selectedType === dept ? 'selected' : ''}
-              id="clickAvailable"
-              key={dept}>
-              <p>{dept}</p>
+          ) : null}
+          {selectedType === 2 ? (
+            <div>
+              {Dept.map(dept => (
+                <div
+                  onClick={() => handleTypeClick(dept)}
+                  className={selectedType === dept ? 'selected' : ''}
+                  id="clickAvailable"
+                  key={dept}>
+                  <p>{dept}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      ) : null}
+          ) : null}
+        </>
+      )}
     </div>
   );
 }
