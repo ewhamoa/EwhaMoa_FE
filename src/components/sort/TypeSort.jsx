@@ -1,12 +1,24 @@
 import { ClubType, Majors, Dept } from './sort.const';
 import { useState, useEffect, useRef } from 'react';
 
-export function TypeSort({ onSelect }) {
+export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
   const [selectedType, setSelectedType] = useState('');
+  const [selectedMajor, setSelectedMajor] = useState('');
+  const [selectedDept, setSelectedDept] = useState('');
 
   const handleTypeClick = clickedType => {
     setSelectedType(prevSelected => (prevSelected === clickedType ? '' : clickedType));
     onSelect(clickedType);
+  };
+
+  const handleMajorTypeClick = clickedMajor => {
+    setSelectedMajor(prevSelected => (prevSelected === clickedMajor ? '' : clickedMajor));
+    onMajorSelect(clickedMajor);
+  };
+
+  const handleDeptTypeClick = clickedMajor => {
+    setSelectedMajor(prevSelected => (prevSelected === clickedMajor ? '' : clickedMajor));
+    onDeptSelect(clickedMajor);
   };
 
   useEffect(() => {
@@ -36,12 +48,12 @@ export function TypeSort({ onSelect }) {
 
   return (
     <div>
-      <div onClick={showModal}>
+      <div onClick={showModal} className="align-row">
         <p>소속</p> <img src="/arrow.svg" />
       </div>
       {modalOpen && (
-        <>
-          <div ref={modalRef}>
+        <div ref={modalRef}>
+          <div>
             {ClubType.map(({ id, type }) => (
               <div
                 onClick={() => handleTypeClick(id)}
@@ -57,8 +69,8 @@ export function TypeSort({ onSelect }) {
             <div>
               {Majors.map(major => (
                 <div
-                  onClick={() => handleTypeClick(major)}
-                  className={selectedType === major ? 'selected' : ''}
+                  onClick={() => handleMajorTypeClick(major)}
+                  className={selectedMajor === major ? 'selected' : ''}
                   id="clickAvailable"
                   key={major}>
                   <p>{major}</p>
@@ -70,8 +82,8 @@ export function TypeSort({ onSelect }) {
             <div>
               {Dept.map(dept => (
                 <div
-                  onClick={() => handleTypeClick(dept)}
-                  className={selectedType === dept ? 'selected' : ''}
+                  onClick={() => handleDeptTypeClick(dept)}
+                  className={selectedDept === dept ? 'selected' : ''}
                   id="clickAvailable"
                   key={dept}>
                   <p>{dept}</p>
@@ -79,7 +91,7 @@ export function TypeSort({ onSelect }) {
               ))}
             </div>
           ) : null}
-        </>
+        </div>
       )}
     </div>
   );

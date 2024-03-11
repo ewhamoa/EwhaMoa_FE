@@ -18,3 +18,13 @@ span {
   font-size: 13px;
   font-weight: 800;
 }
+
+label {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+}
+
+.align-row {
+  display: flex;
+  flex-direction: row;
+}

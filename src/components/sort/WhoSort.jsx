@@ -36,7 +36,7 @@ export function WhoSort({ onSelect }) {
 
   return (
     <div>
-      <div onClick={showModal}>
+      <div onClick={showModal} className="align-row">
         <p>모집 대상</p> <img src="/arrow.svg" />
       </div>
       {modalOpen && (

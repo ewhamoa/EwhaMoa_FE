@@ -36,7 +36,7 @@ export function SubjectSort({ onSelect }) {
 
   return (
     <div>
-      <div onClick={showModal}>
+      <div onClick={showModal} className="align-row">
         <p>주제</p>
         <img src="/arrow.svg" />
       </div>

@@ -4,14 +4,25 @@ import { TypeSort, WhoSort } from '../sort';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { SubjectSort } from '../sort/SubjectSort';
+import './main.css';
 
 export function ClubMain() {
   const isClub = true;
   const [posts, setPosts] = useState('');
   const [selectedTypeValue, setTypeSelectedValue] = useState('');
+  const [selectedDeptValue, setDeptSelectedValue] = useState('');
+  const [selectedMajorValue, setMajorSelectedValue] = useState('');
 
   const handleTypeSelectedValue = value => {
     setTypeSelectedValue(value);
+  };
+
+  const handleDeptSelectedValue = value => {
+    setDeptSelectedValue(value);
+  };
+
+  const handleMajorSelectedValue = value => {
+    setMajorSelectedValue(value);
   };
 
   const [selectedWhoValue, setWhoSelectedValue] = useState('');
@@ -60,9 +71,15 @@ export function ClubMain() {
   return (
     <div>
       <Header />
-      <TypeSort onSelect={handleTypeSelectedValue} />
-      <WhoSort onSelect={handleWhoSelectedValue} />
-      <SubjectSort onSelect={handleSubSelectedValue} />
+      <div className="align-row" id="space-between">
+        <TypeSort
+          onSelect={handleTypeSelectedValue}
+          onDeptSelect={handleDeptSelectedValue}
+          onMajorSelect={handleMajorSelectedValue}
+        />
+        <WhoSort onSelect={handleWhoSelectedValue} />
+        <SubjectSort onSelect={handleSubSelectedValue} />
+      </div>
       {posts.data === undefined ? (
         <div>loading...</div>
       ) : filterData().length !== 0 ? (
