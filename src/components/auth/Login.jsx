@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Logo } from '../main/Logo';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 
@@ -47,17 +46,14 @@ export function Login() {
   return (
     <div id="login-page-whole">
       <div id="login-left">
-        <div id="logo" style={{ marginLeft: '100px' }}>
-          <Logo />
-        </div>
         <div id="login-page">
           <div id="login">
             <div id="welcome">
-              <strong> 학교 이메일로 로그인하세요 </strong>
+              <strong> 나에게 필요했던 공고, </strong>
+              <strong> 이제 한눈에 모아보세요. </strong>
             </div>
             <div id="login-register">
               <form id="id-pw" onSubmit={handleSubmit}>
-                <p>이메일</p>
                 <input
                   id="id"
                   type="text"
@@ -66,7 +62,7 @@ export function Login() {
                   value={email}
                   onChange={handleInputChange}
                 />
-                <p>비밀번호</p>
+
                 <input
                   id="pw"
                   type="password"
@@ -76,11 +72,11 @@ export function Login() {
                   onChange={handleInputChange}
                 />
                 {!success && <span>아이디 또는 비밀번호를 확인하세요.</span>}
-                <button type="submit" className="login-register-button">
+                <button type="submit" className="login-register-button" id="register-button">
                   로그인
                 </button>
                 <Link to="/signup">
-                  <button type="submit" className="login-register-button" id="register-button">
+                  <button type="submit" className="login-register-button">
                     회원가입
                   </button>
                 </Link>
@@ -89,7 +85,9 @@ export function Login() {
           </div>
         </div>
       </div>
-      <div id="login-right"></div>
+      <div id="login-right">
+        <img src="/login-right.svg" />
+      </div>
     </div>
   );
 }

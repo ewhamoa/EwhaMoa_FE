@@ -1,22 +1,31 @@
 #login-page-whole {
-  height: 180%;
-  background: linear-gradient(to right, white 550px, #087112 550px);
+  background: #16a085;
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  height: 100vh;
 }
 
 #login-page {
   display: flex;
   flex-direction: row;
   font-family: 'Nunito';
-  align-items: center;
   margin-left: 0px;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 30px 30px 0px 0px;
+  width: 736px;
+  margin-left: 100px;
+  margin-top: 100px;
+  justify-content: center;
+  padding-top: 150px;
+  height: 120vh;
 }
 
 #login-left {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #welcome {
@@ -27,7 +36,10 @@
 #login {
   display: flex;
   flex-direction: column;
-  margin-right: 100px;
+
+  overflow: hidden;
+
+  display: flex;
 }
 
 #id-pw {
@@ -36,66 +48,55 @@
   flex-direction: column;
 }
 
-#welcome {
-  width: 350px;
-  font-size: 13px;
-}
-
 #welcome > strong {
-  font-size: 25px;
-}
-
-#login {
-  margin-left: 100px;
-  margin-top: 100px;
+  font-family: 'Inter';
+  font-size: 32px;
+  font-weight: 800;
 }
 
 #id-pw {
-  width: 350px;
-}
-
-#id-pw > p {
-  margin-top: 20px;
-  margin-bottom: 1vh;
-  font-size: 14px;
+  width: 548px;
 }
 
 #id,
 #pw {
-  padding-left: 10px;
-  border: 1px #ccc solid;
-  border-radius: 8px;
-  font-size: 14px;
-  height: 44px;
+  padding-left: 30px;
+  padding-top: 3px;
+  border: 3px #d9d9d9 solid;
+  border-radius: 10px;
+  font-size: 24px;
+  height: 73px;
+  display: flex;
+  margin-bottom: 20px;
 }
 
 #pw {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .login-register-button {
-  margin-top: 10px;
+  margin-top: 20px;
 
-  background-color: darkgreen;
+  background-color: #16a085;
   color: white;
-
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 24px;
+  font-weight: bold;
   width: 100%;
-  height: 44px;
+  height: 76px;
 }
 
 #register-button {
   display: flex;
   justify-content: center;
-  font-size: 13px;
-  align-items: baseline;
+  align-items: center;
+
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  color: black;
-  width: 350px;
+  color: #16a085;
+  width: 100%;
   background-color: white;
-  border: 1px #ccc solid;
+  border: 3px #16a085 solid;
 }
 
 #register-button > #green {
@@ -106,6 +107,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
 }

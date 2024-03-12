@@ -63,7 +63,7 @@ export function ClubMain() {
               (post?.affiliationType === 5 && (selectedTypeValue === 3 || selectedTypeValue === 4)) ||
               post?.affiliationType === selectedTypeValue) &&
             (!selectedMajorValue || post?.affiliationName === selectedMajorValue) &&
-            (!selectedSubValue || post?.affiliationName === selectedSubValue) &&
+            (!selectedSubValue || post?.topic === selectedSubValue) &&
             (!selectedWhoValue ||
               post?.grade === selectedWhoValue ||
               (post?.grade === 2 && selectedWhoValue === 1) ||

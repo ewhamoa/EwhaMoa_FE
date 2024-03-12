@@ -78,7 +78,7 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
           </div>
 
           {selectedType === 1 ? (
-            <div id="select-modal">
+            <div id="line">
               <div id="select-list">
                 {Majors.map(major => (
                   <div
@@ -93,7 +93,7 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
             </div>
           ) : null}
           {selectedType === 2 ? (
-            <div id="select-modal">
+            <div id="line">
               <div id="select-list">
                 {Dept.map(dept => (
                   <div

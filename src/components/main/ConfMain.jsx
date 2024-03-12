@@ -52,14 +52,23 @@ export function ConfMain() {
   function filterData() {
     if (posts.data !== undefined) {
       if (posts?.data.length !== 0) {
-        const filteredData = posts?.data.filter(
+        const filteredData = posts?.filter(
           post =>
             (!selectedTypeValue ||
-              (post?.where === 5 && (selectedTypeValue === 3 || selectedTypeValue === 4)) ||
-              post?.where === selectedTypeValue) &&
-            (!selectedMajorValue || post?.affiliationId === selectedWhoValue) &&
-            (!selectedSubValue || post?.what === selectedSubValue) &&
-            (!selectedWhoValue || post?.who === selectedWhoValue),
+              (selectedTypeValue === 0 &&
+                (post?.affiliationType === 1 ||
+                  post?.affiliationType === 2 ||
+                  post?.affiliationType === 3 ||
+                  post?.affiliationType === 4)) ||
+              (post?.affiliationType === 5 && (selectedTypeValue === 3 || selectedTypeValue === 4)) ||
+              post?.affiliationType === selectedTypeValue) &&
+            (!selectedMajorValue || post?.affiliationName === selectedMajorValue) &&
+            (!selectedSubValue || post?.topic === selectedSubValue) &&
+            (!selectedWhoValue ||
+              post?.grade === selectedWhoValue ||
+              (post?.grade === 2 && selectedWhoValue === 1) ||
+              (post?.grade === 3 && (selectedWhoValue === 1 || selectedWhoValue === 2)) ||
+              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))),
         );
 
         return filteredData;
@@ -72,10 +81,12 @@ export function ConfMain() {
   return (
     <div id="wrap">
       <Header isClub={isClub} />
-      <div className="align-row" id="space-between">
-        <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
-        <WhoSort onSelect={handleWhoSelectedValue} />
-        <TopicSort onSelect={handleSubSelectedValue} />
+      <div id="header-wrap">
+        <div className="align-row" id="filter">
+          <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
+          <WhoSort onSelect={handleWhoSelectedValue} />
+          <TopicSort onSelect={handleSubSelectedValue} />
+        </div>
       </div>
       {posts.data === undefined ? (
         <div>loading...</div>

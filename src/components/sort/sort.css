@@ -8,7 +8,7 @@
   justify-content: space-between;
   margin-top: 20px;
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 20px;
   cursor: pointer;
 }
@@ -24,12 +24,22 @@
   position: absolute;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 25px;
   z-index: 9999;
   width: 478px;
+  border-radius: 10px;
+}
+
+#line {
+  border-top: #ccc 1px solid;
+  margin-top: 20px;
+  padding-top: 10px;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 #select-list {
+  margin: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -38,7 +48,7 @@
 #select {
   border: 1px black solid;
   border-radius: 30px;
-  margin: 8px;
+  margin: 6px;
   padding: 0px;
   padding-left: 30px;
   padding-right: 30px;

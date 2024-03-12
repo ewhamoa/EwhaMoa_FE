@@ -37,11 +37,9 @@ export function PostDetail({ postId, isClub, link }) {
             <h3>{posts.title}</h3>
             <p>{posts.groupName}</p>
             <p>|</p>
-            <p>{posts.affiliation_type}</p>
+            <p>{posts.affiliationType}</p>
             <p>|</p>
             <p>{isClub ? '동아리' : '학회'}</p>
-            <p>|</p>
-            <p>{posts.groupName}</p>
             <p>|</p>
             <p>{posts.grade}</p>
             <p>|</p>

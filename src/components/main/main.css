@@ -3,6 +3,10 @@
   gap: 100px;
 }
 
+body {
+  background: white;
+}
+
 #header {
   display: flex;
   align-items: center;
