@@ -1,23 +1,35 @@
 import { ClubType, Majors, Dept } from './sort.const';
 import { useState, useEffect, useRef } from 'react';
+import './sort.css';
 
 export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
   const [selectedType, setSelectedType] = useState('');
   const [selectedMajor, setSelectedMajor] = useState('');
 
   const handleTypeClick = clickedType => {
-    setSelectedType(prevSelected => (prevSelected === clickedType ? '' : clickedType));
-    onSelect(clickedType);
+    if (selectedType === clickedType) {
+      setSelectedType('');
+      onSelect(''); // 필터링 초기화
+    } else {
+      setSelectedType(clickedType);
+      onSelect(clickedType); // 선택된 값 전달
+    }
   };
 
   const handleMajorTypeClick = clickedMajor => {
-    setSelectedMajor(prevSelected => (prevSelected === clickedMajor ? '' : clickedMajor));
-    onMajorSelect(clickedMajor);
+    if (selectedMajor === clickedMajor) {
+      setSelectedMajor('');
+      onMajorSelect(''); // 필터링 초기화
+    } else {
+      setSelectedMajor(clickedMajor);
+      onMajorSelect(clickedMajor); // 선택된 값 전달
+    }
   };
 
   useEffect(() => {
-    console.log(selectedType.type);
-  }, [selectedType]);
+    console.log(selectedType);
+    console.log(selectedMajor);
+  }, [selectedMajor, selectedType]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const modalRef = useRef();
@@ -40,19 +52,25 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
     setModalOpen(true);
   };
 
+  useEffect(() => {
+    if (selectedType !== 1 || selectedType !== 2) {
+      setSelectedMajor('');
+    }
+  }, [selectedType]);
+
   return (
     <div>
-      <div onClick={showModal} className="align-row">
+      <div onClick={showModal} className="align-row" id="dropdown">
         <p>소속</p> <img src="/arrow.svg" />
       </div>
       {modalOpen && (
-        <div ref={modalRef}>
-          <div>
+        <div ref={modalRef} id="select-modal">
+          <div id="select-list">
             {ClubType.map(({ id, type }) => (
               <div
                 onClick={() => handleTypeClick(id)}
                 className={selectedType === id ? 'selected' : ''}
-                id="clickAvailable"
+                id="select"
                 key={id}>
                 <p>{type}</p>
               </div>

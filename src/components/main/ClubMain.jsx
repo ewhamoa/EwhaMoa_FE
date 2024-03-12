@@ -7,6 +7,7 @@ import { SubjectSort } from '../sort/SubjectSort';
 import './main.css';
 import * as linkify from 'linkifyjs';
 import linkifyHtml from 'linkify-html';
+import { dummy } from './dummyData';
 
 export function ClubMain() {
   const isClub = true;
@@ -48,19 +49,26 @@ export function ClubMain() {
     fetchPosts();
   }, [posts?.postId]);
 
-  const link = linkify.find(posts);
-
   function filterData() {
-    if (posts.data !== undefined) {
-      if (posts?.data.length !== 0) {
-        const filteredData = posts?.data.filter(
+    if (dummy !== undefined) {
+      if (dummy?.length !== 0) {
+        const filteredData = dummy?.filter(
           post =>
             (!selectedTypeValue ||
-              (post?.where === 5 && (selectedTypeValue === 3 || selectedTypeValue === 4)) ||
-              post?.where === selectedTypeValue) &&
-            (!selectedMajorValue || post?.affiliationId === selectedWhoValue) &&
-            (!selectedSubValue || post?.what === selectedSubValue) &&
-            (!selectedWhoValue || post?.who === selectedWhoValue),
+              (selectedTypeValue === 0 &&
+                (post?.affiliationType === 1 ||
+                  post?.affiliationType === 2 ||
+                  post?.affiliationType === 3 ||
+                  post?.affiliationType === 4)) ||
+              (post?.affiliationType === 5 && (selectedTypeValue === 3 || selectedTypeValue === 4)) ||
+              post?.affiliationType === selectedTypeValue) &&
+            (!selectedMajorValue || post?.affiliationName === selectedMajorValue) &&
+            (!selectedSubValue || post?.affiliationName === selectedSubValue) &&
+            (!selectedWhoValue ||
+              post?.grade === selectedWhoValue ||
+              (post?.grade === 2 && selectedWhoValue === 1) ||
+              (post?.grade === 3 && (selectedWhoValue === 1 || selectedWhoValue === 2)) ||
+              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))),
         );
 
         return filteredData;
@@ -71,29 +79,31 @@ export function ClubMain() {
   }
 
   return (
-    <div>
-      <Header />
-      <div className="align-row" id="space-between">
-        <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
-        <WhoSort onSelect={handleWhoSelectedValue} />
-        <SubjectSort onSelect={handleSubSelectedValue} />
+    <div id="wrap">
+      <Header isClub={isClub} />
+      <div id="header-wrap">
+        <div className="align-row" id="filter">
+          <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
+          <WhoSort onSelect={handleWhoSelectedValue} />
+          <SubjectSort onSelect={handleSubSelectedValue} />
+        </div>
       </div>
-      {posts.data === undefined ? (
+      {dummy === undefined ? (
         <div>loading...</div>
       ) : filterData().length !== 0 ? (
-        filterData()?.map(({ postId, title, text, createdAt, due, link }) => (
+        filterData()?.map(({ postId, title, body, createdAt, due }) => (
           <PostItem
             key={postId}
             postId={postId}
             title={title}
-            text={text}
+            body={body}
             createdAt={createdAt}
             due={due}
             link={
-              linkify.find(text)[0].href.includes('forms')
-                ? linkify.find(text)[0].href
-                : linkify.find(text)[1].href.includes('forms')
-                  ? linkify.find(text)[1].href
+              linkify.find(body)[0].href.includes('forms')
+                ? linkify.find(body)[0].href
+                : linkify.find(body)[1].href.includes('forms')
+                  ? linkify.find(body)[1].href
                   : null
             }
             isClub={isClub}

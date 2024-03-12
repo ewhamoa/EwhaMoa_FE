@@ -3,7 +3,7 @@ import { PostItem } from '../posts';
 import { TypeSort, WhoSort } from '../sort';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TopicSort } from '../sort/SubjectSort';
+import { TopicSort } from '../sort';
 import './main.css';
 
 import * as linkify from 'linkifyjs';
@@ -70,8 +70,8 @@ export function ConfMain() {
   }
 
   return (
-    <div>
-      <Header />
+    <div id="wrap">
+      <Header isClub={isClub} />
       <div className="align-row" id="space-between">
         <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
         <WhoSort onSelect={handleWhoSelectedValue} />

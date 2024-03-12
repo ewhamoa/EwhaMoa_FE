@@ -11,6 +11,11 @@ button {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 span {
   color: darkgreen;
   margin-top: 5px;
@@ -27,4 +32,15 @@ label {
 .align-row {
   display: flex;
   flex-direction: row;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Inter';
+}
+
+p {
+  margin: 0px;
 }

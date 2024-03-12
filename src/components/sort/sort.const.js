@@ -1,5 +1,4 @@
 export const ClubType = [
-  { type: '소속 전체', id: 0 },
   { type: '과', id: 1 },
   { type: '단과대', id: 2 },
   { type: '중앙', id: 3 },

@@ -36,20 +36,22 @@ export function WhoSort({ onSelect }) {
 
   return (
     <div>
-      <div onClick={showModal} className="align-row">
+      <div onClick={showModal} className="align-row" id="dropdown">
         <p>모집 대상</p> <img src="/arrow.svg" />
       </div>
       {modalOpen && (
-        <div ref={modalRef}>
-          {Who.map(({ id, who }) => (
-            <div
-              onClick={() => handleTypeClick(id)}
-              className={selectedType === id ? 'selected' : ''}
-              id="clickAvailable"
-              key={id}>
-              <p>{who}</p>
-            </div>
-          ))}
+        <div ref={modalRef} id="select-modal">
+          <div id="select-list">
+            {Who.map(({ id, who }) => (
+              <div
+                onClick={() => handleTypeClick(id)}
+                className={selectedType === id ? 'selected' : ''}
+                id="select"
+                key={id}>
+                <p>{who}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

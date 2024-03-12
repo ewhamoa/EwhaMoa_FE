@@ -1,11 +1,18 @@
 import { Logo } from './Logo';
+import { Link } from 'react-router-dom';
 
-export function Header() {
+export function Header({ isClub }) {
   return (
-    <div>
-      <Logo />
-      <h3>학회</h3>
-      <h3>동아리</h3>
+    <div id="header-wrap">
+      <div id="header">
+        <Logo />
+        <Link to="/conference" className="category" id={isClub ? null : 'underline'}>
+          학회
+        </Link>
+        <Link to="/club" className="category" id={isClub ? 'underline' : null}>
+          동아리
+        </Link>
+      </div>
     </div>
   );
 }

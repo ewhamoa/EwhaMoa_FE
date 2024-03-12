@@ -1,0 +1,54 @@
+#dropdown {
+  width: 240px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#filter {
+  display: flex;
+  gap: 20px;
+  width: 1180px;
+  align-items: flex-start;
+}
+
+#select-modal {
+  position: fixed;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 9999;
+  width: 478px;
+}
+
+#select-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#select {
+  border: 1px black solid;
+  border-radius: 30px;
+  margin: 8px;
+  padding: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #37e0bf;
+}
