@@ -14,6 +14,11 @@ export function ClubMain() {
   const [posts, setPosts] = useState('');
   const [selectedTypeValue, setTypeSelectedValue] = useState('');
   const [selectedMajorValue, setMajorSelectedValue] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchInputChange = event => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleTypeSelectedValue = value => {
     setTypeSelectedValue(value);
@@ -71,7 +76,7 @@ export function ClubMain() {
               (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))),
         );
 
-        return filteredData;
+        return filteredData.title.includes(searchTerm) || filteredData.body.includes(searchTerm);
       }
     } else {
       return;
@@ -81,6 +86,7 @@ export function ClubMain() {
   return (
     <div id="wrap">
       <Header isClub={isClub} />
+      <input type="text" placeholder="검색어를 입력하세요..." value={searchTerm} onChange={handleSearchInputChange} />
       <div id="header-wrap">
         <div className="align-row" id="filter">
           <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />

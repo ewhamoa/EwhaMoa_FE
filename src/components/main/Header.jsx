@@ -1,5 +1,6 @@
 import { Logo } from './Logo';
 import { Link } from 'react-router-dom';
+import { SearchBar } from './SearchBar';
 
 export function Header({ isClub }) {
   return (
@@ -12,6 +13,7 @@ export function Header({ isClub }) {
         <Link to="/club" className="category" id={isClub ? 'underline' : null}>
           동아리
         </Link>
+        <SearchBar />
       </div>
     </div>
   );
