@@ -78,29 +78,33 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
           </div>
 
           {selectedType === 1 ? (
-            <div>
-              {Majors.map(major => (
-                <div
-                  onClick={() => handleMajorTypeClick(major)}
-                  className={selectedMajor === major ? 'selected' : ''}
-                  id="clickAvailable"
-                  key={major}>
-                  <p>{major}</p>
-                </div>
-              ))}
+            <div id="select-modal">
+              <div id="select-list">
+                {Majors.map(major => (
+                  <div
+                    onClick={() => handleMajorTypeClick(major)}
+                    className={selectedMajor === major ? 'selected' : ''}
+                    id="select"
+                    key={major}>
+                    <p>{major}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
           {selectedType === 2 ? (
-            <div>
-              {Dept.map(dept => (
-                <div
-                  onClick={() => handleMajorTypeClick(dept)}
-                  className={selectedMajor === dept ? 'selected' : ''}
-                  id="clickAvailable"
-                  key={dept}>
-                  <p>{dept}</p>
-                </div>
-              ))}
+            <div id="select-modal">
+              <div id="select-list">
+                {Dept.map(dept => (
+                  <div
+                    onClick={() => handleMajorTypeClick(dept)}
+                    className={selectedMajor === dept ? 'selected' : ''}
+                    id="select"
+                    key={dept}>
+                    <p>{dept}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ) : null}
         </div>
