@@ -3,13 +3,14 @@ import { PostItem } from '../posts';
 import { TypeSort, WhoSort } from '../sort';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { SubjectSort } from '../sort/SubjectSort';
+import { TopicSort } from '../sort/SubjectSort';
 import './main.css';
+
 import * as linkify from 'linkifyjs';
 import linkifyHtml from 'linkify-html';
 
-export function ClubMain() {
-  const isClub = true;
+export function ConfMain() {
+  const isClub = false;
   const [posts, setPosts] = useState('');
   const [selectedTypeValue, setTypeSelectedValue] = useState('');
   const [selectedMajorValue, setMajorSelectedValue] = useState('');
@@ -37,7 +38,7 @@ export function ClubMain() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await axios.get('/main/club');
+        const response = await axios.get('/main/conference');
 
         setPosts(response);
       } catch (error) {
@@ -47,8 +48,6 @@ export function ClubMain() {
 
     fetchPosts();
   }, [posts?.postId]);
-
-  const link = linkify.find(posts);
 
   function filterData() {
     if (posts.data !== undefined) {
@@ -76,7 +75,7 @@ export function ClubMain() {
       <div className="align-row" id="space-between">
         <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
         <WhoSort onSelect={handleWhoSelectedValue} />
-        <SubjectSort onSelect={handleSubSelectedValue} />
+        <TopicSort onSelect={handleSubSelectedValue} />
       </div>
       {posts.data === undefined ? (
         <div>loading...</div>

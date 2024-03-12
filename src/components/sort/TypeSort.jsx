@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
   const [selectedType, setSelectedType] = useState('');
   const [selectedMajor, setSelectedMajor] = useState('');
-  const [selectedDept, setSelectedDept] = useState('');
 
   const handleTypeClick = clickedType => {
     setSelectedType(prevSelected => (prevSelected === clickedType ? '' : clickedType));
@@ -14,11 +13,6 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
   const handleMajorTypeClick = clickedMajor => {
     setSelectedMajor(prevSelected => (prevSelected === clickedMajor ? '' : clickedMajor));
     onMajorSelect(clickedMajor);
-  };
-
-  const handleDeptTypeClick = clickedMajor => {
-    setSelectedMajor(prevSelected => (prevSelected === clickedMajor ? '' : clickedMajor));
-    onDeptSelect(clickedMajor);
   };
 
   useEffect(() => {
@@ -82,8 +76,8 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
             <div>
               {Dept.map(dept => (
                 <div
-                  onClick={() => handleDeptTypeClick(dept)}
-                  className={selectedDept === dept ? 'selected' : ''}
+                  onClick={() => handleMajorTypeClick(dept)}
+                  className={selectedMajor === dept ? 'selected' : ''}
                   id="clickAvailable"
                   key={dept}>
                   <p>{dept}</p>

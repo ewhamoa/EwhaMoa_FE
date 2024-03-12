@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Login, Register, ClubMain } from './components';
+import { Login, Register, ClubMain, Test } from './components';
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
         <Route path="/" element={<ClubMain />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </div>
   );

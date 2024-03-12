@@ -4,6 +4,7 @@ export const ClubType = [
   { type: '단과대', id: 2 },
   { type: '중앙', id: 3 },
   { type: '연합', id: 4 },
+  { type: '기타', id: 6 },
 ];
 
 export const Majors = [
@@ -117,4 +118,19 @@ export const Subject = [
   { id: 6, sub: '체육' },
   { id: 7, sub: '학술' },
   { id: 8, sub: 'IT' },
+];
+
+export const Topic = [
+  { topic: '인문학', id: 1 },
+  { topic: '사회과학', id: 2 },
+  { topic: '경영학', id: 3 },
+  { topic: '자연과학', id: 4 },
+  { topic: '공학', id: 5 },
+  { topic: '교육학', id: 6 },
+  { topic: '의학', id: 7 },
+  { topic: '간호학', id: 8 },
+  { topic: '약학', id: 9 },
+  { topic: '음악', id: 10 },
+  { topic: '미술', id: 11 },
+  { topic: '기타', id: 12 },
 ];
