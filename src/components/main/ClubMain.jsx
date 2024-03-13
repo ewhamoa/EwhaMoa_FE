@@ -16,10 +16,6 @@ export function ClubMain() {
   const [selectedMajorValue, setMajorSelectedValue] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearchInputChange = event => {
-    setSearchTerm(event.target.value);
-  };
-
   const handleTypeSelectedValue = value => {
     setTypeSelectedValue(value);
   };
@@ -52,12 +48,16 @@ export function ClubMain() {
     }
 
     fetchPosts();
-  }, [posts?.postId]);
+  }, [posts?.postId, searchTerm]);
+
+  const handleSearchClear = () => {
+    setSearchTerm('');
+  };
 
   function filterData() {
-    if (dummy !== undefined) {
-      if (dummy?.length !== 0) {
-        const filteredData = dummy?.filter(
+    if (posts !== undefined) {
+      if (posts?.length !== 0) {
+        const filteredData = posts.data?.filter(
           post =>
             (!selectedTypeValue ||
               (selectedTypeValue === 0 &&
@@ -73,10 +73,14 @@ export function ClubMain() {
               post?.grade === selectedWhoValue ||
               (post?.grade === 2 && selectedWhoValue === 1) ||
               (post?.grade === 3 && (selectedWhoValue === 1 || selectedWhoValue === 2)) ||
-              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))),
+              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))) &&
+            (searchTerm !== ''
+              ? post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.body.toLowerCase().includes(searchTerm.toLowerCase())
+              : true),
         );
 
-        return filteredData.title.includes(searchTerm) || filteredData.body.includes(searchTerm);
+        return filteredData;
       }
     } else {
       return;
@@ -85,8 +89,7 @@ export function ClubMain() {
 
   return (
     <div id="wrap">
-      <Header isClub={isClub} />
-      <input type="text" placeholder="검색어를 입력하세요..." value={searchTerm} onChange={handleSearchInputChange} />
+      <Header isClub={isClub} onSearch={setSearchTerm} searchClear={handleSearchClear} />
       <div id="header-wrap">
         <div className="align-row" id="filter">
           <TypeSort onSelect={handleTypeSelectedValue} onMajorSelect={handleMajorSelectedValue} />
@@ -96,7 +99,7 @@ export function ClubMain() {
       </div>
       {dummy === undefined ? (
         <div>loading...</div>
-      ) : filterData().length !== 0 ? (
+      ) : filterData()?.length !== 0 ? (
         filterData()?.map(({ postId, title, body, createdAt, due }) => (
           <PostItem
             key={postId}
@@ -106,11 +109,13 @@ export function ClubMain() {
             createdAt={createdAt}
             due={due}
             link={
-              linkify.find(body)[0].href.includes('forms')
-                ? linkify.find(body)[0].href
-                : linkify.find(body)[1].href.includes('forms')
-                  ? linkify.find(body)[1].href
-                  : null
+              linkify.find(body) === undefined
+                ? null
+                : linkify.find(body)[0]?.href.includes('forms')
+                  ? linkify.find(body)[0]?.href
+                  : linkify.find(body)[1]?.href.includes('forms')
+                    ? linkify.find(body)[1]?.href
+                    : null
             }
             isClub={isClub}
           />

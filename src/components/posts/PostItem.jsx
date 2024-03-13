@@ -39,9 +39,11 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub }) 
         <p>{body}</p>
         <div className="align-row">
           <p>{createdAt}</p>
-          <Link to={`${link}`} target="_blank">
-            <button>지원하기</button>
-          </Link>
+          {link !== null ? (
+            <Link to={`${link}`} target="_blank">
+              <button>지원하기</button>
+            </Link>
+          ) : null}
         </div>
       </div>
       {modalOpen && <PostDetail postId={postId} isClub={isClub} link={link} />}

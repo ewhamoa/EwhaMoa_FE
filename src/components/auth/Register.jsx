@@ -45,21 +45,23 @@ export const Register = () => {
       const response = await axios.post('/signup', formData);
 
       setIsSnackbarOpen(true);
-      sessionStorage.setItem('userId', response.data.userId);
+      sessionStorage.setItem('userId', response.userId);
       sessionStorage.setItem('IsRegistered', true);
-      setNick(response.data.nickname);
+      setNick(response.nickname);
 
       setTimeout(() => {
         setIsSnackbarOpen(false);
         navigate('/');
       }, 3000);
     } catch (error) {
+      console.log(error.response.data);
       setEmailExists(error.response.data !== '이미 존재하는 이메일입니다.');
       setEmailValid(error.response.data !== '유효하지 않은 이메일입니다.');
     }
   };
 
-  const handleSendCode = async () => {
+  const handleSendCode = async e => {
+    e.preventDefault();
     try {
       await axios.post('/signup/check', { email: formData.email });
       // 인증 코드를 성공적으로 보냈음을 사용자에게 알림
@@ -69,7 +71,8 @@ export const Register = () => {
     }
   };
 
-  const handleVerifyCode = async () => {
+  const handleVerifyCode = async e => {
+    e.preventDefault();
     try {
       await axios.post('/signup/verify', { email: formData.email, code: emailCode });
       // 인증 코드가 일치함을 사용자에게 알림

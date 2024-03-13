@@ -14,6 +14,7 @@ export function ConfMain() {
   const [posts, setPosts] = useState('');
   const [selectedTypeValue, setTypeSelectedValue] = useState('');
   const [selectedMajorValue, setMajorSelectedValue] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleTypeSelectedValue = value => {
     setTypeSelectedValue(value);
@@ -50,9 +51,9 @@ export function ConfMain() {
   }, [posts?.postId]);
 
   function filterData() {
-    if (posts.data !== undefined) {
-      if (posts?.data.length !== 0) {
-        const filteredData = posts?.filter(
+    if (posts !== undefined) {
+      if (posts?.length !== 0) {
+        const filteredData = posts.data?.filter(
           post =>
             (!selectedTypeValue ||
               (selectedTypeValue === 0 &&
@@ -68,7 +69,11 @@ export function ConfMain() {
               post?.grade === selectedWhoValue ||
               (post?.grade === 2 && selectedWhoValue === 1) ||
               (post?.grade === 3 && (selectedWhoValue === 1 || selectedWhoValue === 2)) ||
-              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))),
+              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))) &&
+            (searchTerm !== ''
+              ? post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                post.body.toLowerCase().includes(searchTerm.toLowerCase())
+              : true),
         );
 
         return filteredData;
@@ -91,20 +96,22 @@ export function ConfMain() {
       {posts.data === undefined ? (
         <div>loading...</div>
       ) : filterData().length !== 0 ? (
-        filterData()?.map(({ postId, title, text, createdAt, due, link }) => (
+        filterData()?.map(({ postId, title, body, createdAt, due }) => (
           <PostItem
             key={postId}
             postId={postId}
             title={title}
-            text={text}
+            text={body}
             createdAt={createdAt}
             due={due}
             link={
-              linkify.find(text)[0].href.includes('forms')
-                ? linkify.find(text)[0].href
-                : linkify.find(text)[1].href.includes('forms')
-                  ? linkify.find(text)[1].href
-                  : null
+              linkify.find(body) === undefined
+                ? null
+                : linkify.find(body)[0]?.href.includes('forms')
+                  ? linkify.find(body)[0]?.href
+                  : linkify.find(body)[1]?.href.includes('forms')
+                    ? linkify.find(body)[1]?.href
+                    : null
             }
             isClub={isClub}
           />

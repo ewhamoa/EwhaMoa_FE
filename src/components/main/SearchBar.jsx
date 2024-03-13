@@ -1,78 +1,85 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { PostItem } from '../posts';
-import * as linkify from 'linkifyjs';
+import { useState, useEffect, useRef } from 'react';
 
-export function SearchBar() {
-  const [clubPosts, setClubPosts] = useState([]);
-  const [confPosts, setConfPosts] = useState([]);
+export function SearchBar({ value, onChange, searchClear }) {
+  const [isSearchbarOpen, setSearchbarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [click, setClick] = useState(false);
 
-  // 검색어 입력 핸들러
-  const handleSearchInputChange = event => {
-    setSearchTerm(event.target.value);
+  const [modalOpen, setModalOpen] = useState(isSearchbarOpen);
+  const modalRef = useRef();
+
+  useEffect(() => {
+    const handleValue = () => {
+      setSearchTerm(value);
+    };
+    handleValue();
+  }, [value]);
+
+  useEffect(() => {
+    const handleOutsideClick = event => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setClick(true);
+        setModalOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
+  const showModal = () => {
+    setModalOpen(true);
   };
 
-  // 검색된 게시물 필터링
-  const filteredClubPosts = clubPosts.filter(post => {
-    // 제목이나 내용에 검색어가 포함되어 있는지 확인
-    return (
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.body.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
+  const handleSearchbar = () => {
+    setModalOpen(true);
+    setClick(false);
+    console.log(value);
+  };
 
-  const filteredConfPosts = confPosts.filter(post => {
-    // 제목이나 내용에 검색어가 포함되어 있는지 확인
-    return (
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.body.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
+  const handleKeyPress = event => {
+    if (event.key === 'Enter') {
+      setModalOpen(false);
+    }
+  };
+
+  const clearValue = () => {
+    value = '';
+    setClick(true);
+  };
 
   return (
-    <div>
-      <input type="text" placeholder="검색어를 입력하세요..." value={searchTerm} onChange={handleSearchInputChange} />
-      {/*filteredClubPosts.length === 0 ? (
-        <div>검색 결과가 없습니다.</div>
+    <div id="search">
+      {value === '' || click ? (
+        <img onClick={handleSearchbar} src="/search.svg" />
       ) : (
-        filteredClubPosts.map(({ postId, title, body, createdAt, due }) => (
-          <PostItem
-            key={postId}
-            postId={postId}
-            title={title}
-            body={body}
-            createdAt={createdAt}
-            due={due}
-            link={
-              linkify.find(body)[0].href.includes('forms')
-                ? linkify.find(body)[0].href
-                : linkify.find(body)[1].href.includes('forms')
-                  ? linkify.find(body)[1].href
-                  : null
-            }
-            isClub={true}
-          />
-        )) ||
-        filteredConfPosts.map(({ postId, title, body, createdAt, due }) => (
-          <PostItem
-            key={postId}
-            postId={postId}
-            title={title}
-            body={body}
-            createdAt={createdAt}
-            due={due}
-            link={
-              linkify.find(body)[0].href.includes('forms')
-                ? linkify.find(body)[0].href
-                : linkify.find(body)[1].href.includes('forms')
-                  ? linkify.find(body)[1].href
-                  : null
-            }
-            isClub={false}
-          />
-        ))
-        )*/}
+        <div onClick={searchClear} id="clear">
+          <div onClick={clearValue}>{searchTerm} </div>
+          <div onClick={clearValue}>x</div>
+        </div>
+      )}
+      {modalOpen && (
+        <div id="modal-wrap">
+          <div ref={modalRef}>
+            <div id="search-modal">
+              <div id="search-box">
+                <img src="/search.svg" />
+                <input
+                  type="text"
+                  placeholder="찾으시는 검색어를 입력해 보세요"
+                  value={value}
+                  onChange={onChange}
+                  onKeyPress={handleKeyPress}
+                  id="search-input"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
