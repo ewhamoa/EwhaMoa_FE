@@ -5,8 +5,13 @@ export function WhoSort({ onSelect }) {
   const [selectedType, setSelectedType] = useState('');
 
   const handleTypeClick = clickedType => {
-    setSelectedType(prevSelected => (prevSelected === clickedType ? '' : clickedType));
-    onSelect(clickedType);
+    if (selectedType === clickedType) {
+      setSelectedType('');
+      onSelect(''); // 필터링 초기화
+    } else {
+      setSelectedType(clickedType);
+      onSelect(clickedType); // 선택된 값 전달
+    }
   };
 
   useEffect(() => {

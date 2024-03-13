@@ -10,8 +10,8 @@ export function PostDetail({ postId, isClub, link }) {
       if (isClub) {
         try {
           const response = await axios.get(`/main/club/${postId}`);
-
-          setPosts(response);
+          console.log(response.data);
+          setPosts(response.data);
         } catch (error) {
           console.error('Error fetching posts:', error);
         }
@@ -49,14 +49,14 @@ export function PostDetail({ postId, isClub, link }) {
             <button>지원하기</button>
           </Link>
         </div>
-        <p>{posts.text}</p>
+        <p>{posts.body}</p>
         <div className="align-row">
           <p>{posts.createdAt}</p>
 
           {isClub ? (
-            <img src={`/club-img/${postId}`} alt={`club${postId}`} />
+            <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} />
           ) : (
-            <img src={`/club-img/conf${postId}`} alt={`conf${postId}`} />
+            <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} />
           )}
         </div>
       </div>

@@ -40,7 +40,7 @@ export function ClubMain() {
     async function fetchPosts() {
       try {
         const response = await axios.get('/main/club');
-
+        console.log(response.data);
         setPosts(response);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -71,9 +71,9 @@ export function ClubMain() {
             (!selectedSubValue || post?.topic === selectedSubValue) &&
             (!selectedWhoValue ||
               post?.grade === selectedWhoValue ||
-              (post?.grade === 2 && selectedWhoValue === 1) ||
-              (post?.grade === 3 && (selectedWhoValue === 1 || selectedWhoValue === 2)) ||
-              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))) &&
+              (selectedWhoValue === 2 && post?.grade === 1) ||
+              (selectedWhoValue === 3 && (post?.grade === 1 || post?.grade === 2)) ||
+              (selectedWhoValue === 4 && (post?.grade === 1 || post?.grade === 2 || post?.grade === 3))) &&
             (searchTerm !== ''
               ? post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.body.toLowerCase().includes(searchTerm.toLowerCase())
