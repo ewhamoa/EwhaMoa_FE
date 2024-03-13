@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './post.css';
 
 export function PostDetail({ postId, isClub, link }) {
   const [posts, setPosts] = useState('');
@@ -30,35 +31,33 @@ export function PostDetail({ postId, isClub, link }) {
   }, [isClub, postId, posts.postId]);
 
   return (
-    <div>
-      <div className="align-column">
-        <div className="align-row">
-          <div className="align-column" id="category">
-            <h3>{posts.title}</h3>
-            <p>{posts.groupName}</p>
-            <p>|</p>
-            <p>{posts.affiliationType}</p>
-            <p>|</p>
-            <p>{isClub ? '동아리' : '학회'}</p>
-            <p>|</p>
-            <p>{posts.grade}</p>
-            <p>|</p>
-            <p>{posts.topic}</p>
-          </div>
-          <Link to={`${link}`} target="_blank">
-            <button>지원하기</button>
-          </Link>
+    <div className="align-column">
+      <div className="align-row">
+        <div className="align-column" id="category">
+          <h3>{posts.title}</h3>
+          <p>{posts.groupName}</p>
+          <p>|</p>
+          <p>{posts.affiliationType}</p>
+          <p>|</p>
+          <p>{isClub ? '동아리' : '학회'}</p>
+          <p>|</p>
+          <p>{posts.grade}</p>
+          <p>|</p>
+          <p>{posts.topic}</p>
         </div>
-        <p>{posts.body}</p>
-        <div className="align-row">
-          <p>{posts.createdAt}</p>
+        <Link to={`${link}`} target="_blank">
+          <button>지원하기</button>
+        </Link>
+      </div>
+      <p>{posts.body}</p>
+      <div className="align-row">
+        <p>{posts.createdAt}</p>
 
-          {isClub ? (
-            <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} />
-          ) : (
-            <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} />
-          )}
-        </div>
+        {isClub ? (
+          <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} />
+        ) : (
+          <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} />
+        )}
       </div>
     </div>
   );

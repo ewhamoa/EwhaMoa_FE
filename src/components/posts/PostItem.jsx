@@ -46,7 +46,13 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub }) 
           ) : null}
         </div>
       </div>
-      {modalOpen && <PostDetail postId={postId} isClub={isClub} link={link} />}
+      {modalOpen && (
+        <div id="modal-wrap">
+          <div id="detail-modal" ref={modalRef}>
+            <PostDetail postId={postId} isClub={isClub} link={link} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
