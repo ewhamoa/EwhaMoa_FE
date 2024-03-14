@@ -75,70 +75,76 @@ export const Register = () => {
     e.preventDefault();
     try {
       await axios.post('/signup/verify', { email: formData.email, code: emailCode });
-      // 인증 코드가 일치함을 사용자에게 알림
+
       alert('인증 코드가 확인되었습니다.');
     } catch (error) {
       console.error('Error verifying code:', error);
-      // 인증 코드가 일치하지 않음을 사용자에게 알림
+
       alert('인증 코드가 일치하지 않습니다.');
     }
   };
 
   return (
     <>
-      <div style={{ paddingLeft: '100px', borderBottom: '1px solid #eee' }}>
-        <Logo />
-      </div>
-      <div id="register-box">
-        <div id="register">
-          <div id="register-title">
-            <h1>회원가입</h1>
-          </div>
-          <form onSubmit={handleSubmit} id="register-form">
-            <div>
-              <label>이화인 이메일</label>
-              <input
-                id="id"
-                type="email"
-                name="email"
-                value={formData.email}
-                placeholder="이메일"
-                onChange={handleChange}
-              />
-              <button onClick={handleSendCode}>인증코드 요청</button>
-              {!emailValid && <span>이화인 이메일을 입력하세요.</span>}
-              {!emailExists && <span>이미 존재하는 이메일입니다.</span>}
-            </div>
-            <div>
-              <label>인증 코드</label>
-              <input
-                id="id"
-                type="text"
-                name="code"
-                value={emailCode}
-                placeholder="인증코드를 입력하세요."
-                onChange={e => setEmailCode(e.target.value)}
-              />
-              <button onClick={handleVerifyCode}>확인</button>
-            </div>
-            <div>
-              <label>비밀번호</label>
-              <input
-                id="pw"
-                type="password"
-                name="password"
-                value={formData.password}
-                placeholder="알파벳과 숫자만 입력"
-                onChange={handleChange}
-              />
-            </div>
+      <div id="login-page-whole">
+        <div id="login-left">
+          <div id="login-page">
+            <div id="login">
+              <div id="welcome">
+                <h1>회원가입</h1>
+              </div>
+              <div id="login-register">
+                <form onSubmit={handleSubmit} id="id-pw">
+                  <div className="register-input">
+                    <input
+                      id="id"
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      placeholder="이메일"
+                      onChange={handleChange}
+                    />
+                    <button onClick={handleSendCode} id="verify">
+                      전송
+                    </button>
+                  </div>
+                  {!emailValid && <span>이화인 이메일을 입력하세요.</span>}
+                  {!emailExists && <span>이미 존재하는 이메일입니다.</span>}
+                  <div className="register-input">
+                    <input
+                      id="id"
+                      type="text"
+                      name="code"
+                      value={emailCode}
+                      placeholder="인증코드를 입력"
+                      onChange={e => setEmailCode(e.target.value)}
+                    />
+                    <button onClick={handleVerifyCode} id="verify">
+                      인증
+                    </button>
+                  </div>
 
-            {!emailValid && <span>입력한 정보를 확인하세요.</span>}
-            {showNull && <span>필수 항목을 입력하세요.</span>}
-            <button type="submit" id="register-submit">
-              회원가입
-            </button>
-          </form>
+                  <input
+                    id="pw"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    placeholder="비밀번호"
+                    onChange={handleChange}
+                  />
+
+                  {!emailValid && <span>입력한 정보를 확인하세요.</span>}
+                  {showNull && <span>필수 항목을 입력하세요.</span>}
+                  <button type="submit" className="login-register-button">
+                    회원가입
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="login-right">
+          <img src="/login-right.svg" />
         </div>
       </div>
       {isSnackbarOpen && (

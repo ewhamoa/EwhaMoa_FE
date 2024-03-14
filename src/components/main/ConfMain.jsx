@@ -8,7 +8,6 @@ import { Chatbot } from '../chatbot';
 import './main.css';
 
 import * as linkify from 'linkifyjs';
-import linkifyHtml from 'linkify-html';
 
 export function ConfMain() {
   const isClub = false;
