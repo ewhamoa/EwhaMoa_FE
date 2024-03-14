@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { PostDetail } from './PostDetail';
+import { calculateDday, formatDate } from './Date';
 
 export function PostItem({ postId, title, body, createdAt, due, link, isClub }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,21 +25,24 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub }) 
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
+
   return (
     <div id="post-item" onClick={showModal}>
       <div className="badge">
-        <p>D-{due}</p>
+        <p>D-{calculateDday(due)}</p>
       </div>
       <div className="align-column">
         {isClub ? (
-          <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} />
+          <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} id="item-img" />
         ) : (
-          <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} />
+          <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} id="item-img" />
         )}
-        <h3>{title}</h3>
-        <p>{body}</p>
+        <div id="item-text">
+          <h3>{title}</h3>
+          <p id="item-body">{body}</p>
+        </div>
         <div className="align-row">
-          <p>{createdAt}</p>
+          <p id="date">{formatDate(createdAt)}</p>
           {link !== null ? (
             <Link to={`${link}`} target="_blank">
               <button>지원하기</button>

@@ -1,13 +1,12 @@
 button {
-  background-color: darkgreen;
+  background-color: #16a085;
   border: none;
   color: white;
-  size: 10px;
+  size: 16px;
   font-weight: bold;
-  padding: 12px;
-  border-radius: 5px;
-  height: 40px;
-  width: 90px;
+  border-radius: 10px;
+  height: 38px;
+  width: 109px;
   cursor: pointer;
 }
 

@@ -99,34 +99,38 @@ export function ClubMain() {
         </div>
       </div>
       <Chatbot />
-      {posts.data === undefined ? (
-        <div>loading...</div>
-      ) : filterData()?.length !== 0 ? (
-        filterData()?.map(({ postId, title, body, createdAt, due }) => (
-          <PostItem
-            key={postId}
-            postId={postId}
-            title={title}
-            body={body}
-            createdAt={createdAt}
-            due={due}
-            link={
-              linkify.find(body) === undefined
-                ? null
-                : linkify.find(body)[0]?.href.includes('forms')
-                  ? linkify.find(body)[0]?.href
-                  : linkify.find(body)[1]?.href.includes('forms')
-                    ? linkify.find(body)[1]?.href
-                    : null
-            }
-            isClub={isClub}
-          />
-        ))
-      ) : (
-        <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
-          아직 게시글이 없습니다.
-        </h1>
-      )}
+      <div id="item-wrap">
+        <div id="items">
+          {posts.data === undefined ? (
+            <div>loading...</div>
+          ) : filterData().length !== 0 ? (
+            filterData()?.map(({ postId, title, body, createdAt, due }) => (
+              <PostItem
+                key={postId}
+                postId={postId}
+                title={title}
+                body={body}
+                createdAt={createdAt}
+                due={due}
+                link={
+                  linkify.find(body) === undefined
+                    ? null
+                    : linkify.find(body)[0]?.href.includes('forms')
+                      ? linkify.find(body)[0]?.href
+                      : linkify.find(body)[1]?.href.includes('forms')
+                        ? linkify.find(body)[1]?.href
+                        : null
+                }
+                isClub={isClub}
+              />
+            ))
+          ) : (
+            <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
+              아직 게시글이 없습니다.
+            </h1>
+          )}
+        </div>
+      </div>
       <div id="chatbot">
         <Chatbot />
       </div>

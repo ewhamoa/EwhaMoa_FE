@@ -115,3 +115,16 @@ body {
   padding-right: 20px;
   font-weight: 600;
 }
+
+#items {
+  width: 1215px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 10px;
+}
+
+#item-wrap {
+  display: flex;
+  justify-content: center;
+}
