@@ -4,6 +4,7 @@ import { TypeSort, WhoSort } from '../sort';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TopicSort } from '../sort';
+import { Chatbot } from '../chatbot';
 import './main.css';
 
 import * as linkify from 'linkifyjs';
@@ -93,34 +94,39 @@ export function ConfMain() {
           <TopicSort onSelect={handleSubSelectedValue} />
         </div>
       </div>
-      {posts.data === undefined ? (
-        <div>loading...</div>
-      ) : filterData().length !== 0 ? (
-        filterData()?.map(({ postId, title, body, createdAt, due }) => (
-          <PostItem
-            key={postId}
-            postId={postId}
-            title={title}
-            text={body}
-            createdAt={createdAt}
-            due={due}
-            link={
-              linkify.find(body) === undefined
-                ? null
-                : linkify.find(body)[0]?.href.includes('forms')
-                  ? linkify.find(body)[0]?.href
-                  : linkify.find(body)[1]?.href.includes('forms')
-                    ? linkify.find(body)[1]?.href
-                    : null
-            }
-            isClub={isClub}
-          />
-        ))
-      ) : (
-        <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
-          아직 게시글이 없습니다.
-        </h1>
-      )}
+      <Chatbot />
+      <div id="item-wrap">
+        <div id="items">
+          {posts.data === undefined ? (
+            <div>loading...</div>
+          ) : filterData().length !== 0 ? (
+            filterData()?.map(({ postId, title, body, createdAt, due }) => (
+              <PostItem
+                key={postId}
+                postId={postId}
+                title={title}
+                text={body}
+                createdAt={createdAt}
+                due={due}
+                link={
+                  linkify.find(body) === undefined
+                    ? null
+                    : linkify.find(body)[0]?.href.includes('forms')
+                      ? linkify.find(body)[0]?.href
+                      : linkify.find(body)[1]?.href.includes('forms')
+                        ? linkify.find(body)[1]?.href
+                        : null
+                }
+                isClub={isClub}
+              />
+            ))
+          ) : (
+            <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
+              아직 게시글이 없습니다.
+            </h1>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
