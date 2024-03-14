@@ -1,21 +1,15 @@
-import { SelectChat } from './SelectChat';
-import { Recommend } from './Recommend';
-import { Ask } from './Ask';
-import { Chatbot } from './Chatbot';
 import { useState } from 'react';
 import { AnythingElse } from './AnythingElse';
 
 export function Instruction({ message, posts, sent }) {
-  const [selectedValue, setSelectedValue] = useState(-1);
-
-  const handleSelectedValue = value => {
-    setSelectedValue(value);
-  };
   return (
     <>
-      <div id="response">
-        <p>사이트 이용법</p>
+      <div id="res-wrap">
+        <div id="response">
+          <p>사이트 이용법</p>
+        </div>
       </div>
+      <img src="/moa.webp" id="profile" />
       <div id="moa">
         <p>“이화모아”는 이화여자대학교 학생들이 교내외 동아리 및 학회를 보다 편리하게 찾아볼 수 있는 사이트입니다!</p>
 

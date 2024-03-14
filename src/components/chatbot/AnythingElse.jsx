@@ -11,7 +11,7 @@ export function AnythingElse({ message, posts, sent }) {
   };
   return (
     <div>
-      <div id="moa">
+      <div>
         <SelectChat onSelect={handleSelectedValue} greetings={false} />
       </div>
 

@@ -12,9 +12,12 @@ export function Recommend({ inputValue, sent, posts }) {
   };
   return (
     <>
-      <div id="response">
-        <p>비슷한 동아리 추천받기</p>
+      <div id="res-wrap">
+        <div id="response">
+          <p>비슷한 동아리 추천받기</p>
+        </div>
       </div>
+      <img src="/moa.webp" id="profile" />
       <div id="moa">
         <p>
           선호하는 동아리 및 학회의 이름을 띄어쓰기 없이 정확하게 입력해주세요. 입력하신 동아리 및 학회와 유사한 3개의
@@ -23,8 +26,11 @@ export function Recommend({ inputValue, sent, posts }) {
       </div>
       {sent && (
         <>
-          <div id="response">{inputValue}</div>
+          <div id="res-wrap">
+            <div id="response">{inputValue}</div>
+          </div>
           <div id="moa">
+            <img src="/moa.webp" id="profile" />
             <p>이런 공고는 어떠세요?</p>
             {posts.data === undefined ? (
               <div>loading...</div>
