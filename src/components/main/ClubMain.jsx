@@ -8,6 +8,7 @@ import './main.css';
 import * as linkify from 'linkifyjs';
 import linkifyHtml from 'linkify-html';
 import { dummy } from './dummyData';
+import { Chatbot } from '../chatbot';
 
 export function ClubMain() {
   const isClub = true;
@@ -97,7 +98,8 @@ export function ClubMain() {
           <SubjectSort onSelect={handleSubSelectedValue} />
         </div>
       </div>
-      {dummy === undefined ? (
+      <Chatbot />
+      {posts.data === undefined ? (
         <div>loading...</div>
       ) : filterData()?.length !== 0 ? (
         filterData()?.map(({ postId, title, body, createdAt, due }) => (
@@ -125,6 +127,9 @@ export function ClubMain() {
           아직 게시글이 없습니다.
         </h1>
       )}
+      <div id="chatbot">
+        <Chatbot />
+      </div>
     </div>
   );
 }
