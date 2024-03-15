@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Logo } from '../main/Logo';
 import axios from 'axios';
 
 export const Register = () => {
@@ -112,14 +111,14 @@ export const Register = () => {
                   {!emailExists && <span>이미 존재하는 이메일입니다.</span>}
                   <div className="register-input">
                     <input
-                      id="id"
+                      id="code"
                       type="text"
                       name="code"
                       value={emailCode}
                       placeholder="인증코드를 입력"
                       onChange={e => setEmailCode(e.target.value)}
                     />
-                    <button onClick={handleVerifyCode} id="verify">
+                    <button onClick={handleVerifyCode} id="verify2">
                       인증
                     </button>
                   </div>
