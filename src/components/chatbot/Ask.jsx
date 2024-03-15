@@ -2,9 +2,7 @@ import { useState } from 'react';
 
 import { AnythingElse } from './AnythingElse';
 
-export function Ask({ message, posts, sent, onSelect }) {
-  const [delayedRender, setDelayedRender] = useState(false);
-
+export function Ask({ message, posts, sent, onSelect, onMessage, setSent }) {
   const [selectedValue, setSelectedValue] = useState(3);
 
   const handleSelectedValue = value => {
@@ -12,24 +10,29 @@ export function Ask({ message, posts, sent, onSelect }) {
     onSelect(value);
   };
 
-  setTimeout(() => {
-    setDelayedRender(true);
-  }, 2000);
   return (
     <>
       <div id="res-wrap">
         <div id="response">문의하기</div>
       </div>
       <img src="/moa.webp" id="profile" />
-      {delayedRender ? <div id="moa">문의사항을 남겨주세요.</div> : <img src="/loading.gif" id="loading" />}
+
+      <div id="moa">문의사항을 남겨주세요.</div>
       {sent && (
         <>
           <div id="res-wrap">
             <div id="response">{message}</div>
           </div>
           <img src="/moa.webp" id="profile" />
-          {delayedRender ? <div id="moa">접수되었습니다.</div> : <img src="/loading.gif" id="loading" />}
-          <AnythingElse message={message} posts={posts} sent={sent} onSelect={handleSelectedValue} />
+          <div id="moa">접수되었습니다.</div>
+          <AnythingElse
+            message={message}
+            posts={posts}
+            sent={sent}
+            onSelect={handleSelectedValue}
+            onMessage={onMessage}
+            setSent={setSent}
+          />
         </>
       )}
     </>

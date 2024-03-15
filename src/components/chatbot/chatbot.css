@@ -5,6 +5,7 @@
   width: 102px;
   height: 102px;
   cursor: pointer;
+  z-index: 9999;
 }
 
 #chatbot > #select-modal {

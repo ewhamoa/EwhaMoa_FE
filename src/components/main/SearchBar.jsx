@@ -54,7 +54,7 @@ export function SearchBar({ value, onChange, searchClear }) {
   return (
     <div id="search">
       {value === '' || click ? (
-        <img onClick={handleSearchbar} src="/search-major.svg" />
+        <img src="/search.svg" onClick={handleSearchbar} />
       ) : (
         <div onClick={searchClear} id="clear">
           <div onClick={clearValue}>{searchTerm} </div>

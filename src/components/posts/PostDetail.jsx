@@ -91,9 +91,15 @@ export function PostDetail({ postId, isClub, link }) {
       </pre>
       <div className="align-row">
         {isClub ? (
-          <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} />
+          <img
+            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/${postId}.jpg`}
+            alt={`club${postId}`}
+          />
         ) : (
-          <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} />
+          <img
+            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/conf${postId}.jpg`}
+            alt={`conf${postId}`}
+          />
         )}
       </div>
     </div>

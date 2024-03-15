@@ -67,9 +67,11 @@ export function ConfMain() {
             (!selectedSubValue || post?.topic === selectedSubValue) &&
             (!selectedWhoValue ||
               post?.grade === selectedWhoValue ||
-              (post?.grade === 2 && selectedWhoValue === 1) ||
-              (post?.grade === 3 && (selectedWhoValue === 1 || selectedWhoValue === 2)) ||
-              (post?.grade === 4 && (selectedWhoValue === 1 || selectedWhoValue === 2 || selectedWhoValue === 3))) &&
+              (selectedWhoValue === 1 && (post?.grade === 2 || post?.grade === 3 || post?.grade === 4)) ||
+              (selectedWhoValue === 2 && (post?.grade === 3 || post?.grade === 4 || post?.grade === 5)) ||
+              (selectedWhoValue === 3 && (post?.grade === 4 || post?.grade === 5)) ||
+              (selectedWhoValue === 4 && post?.grade === 5) ||
+              (selectedWhoValue === 5 && (post?.grade === 2 || post?.grade === 3 || post?.grade === 4))) &&
             (searchTerm !== ''
               ? post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 post.body.toLowerCase().includes(searchTerm.toLowerCase())
@@ -97,7 +99,9 @@ export function ConfMain() {
       <div id="item-wrap">
         <div id="items">
           {posts.data === undefined ? (
-            <div>loading...</div>
+            <div id="load">
+              <img src="/loading.gif" />
+            </div>
           ) : filterData().length !== 0 ? (
             filterData()?.map(({ postId, title, body, createdAt, due }) => (
               <PostItem

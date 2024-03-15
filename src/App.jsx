@@ -17,7 +17,11 @@ function App() {
   }, [userId, loggedIn]);
 
   if (loggedIn === null) {
-    return <div>Loading...</div>;
+    return (
+      <div id="load">
+        <img src="/loading.gif" />
+      </div>
+    );
   }
 
   return (

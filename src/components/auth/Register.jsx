@@ -25,10 +25,6 @@ export const Register = () => {
     }));
   };
 
-  const handleSnackbarClose = () => {
-    setIsSnackbarOpen(false);
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
 
@@ -148,10 +144,8 @@ export const Register = () => {
       </div>
       {isSnackbarOpen && (
         <div className="snackbar">
-          <button onClick={handleSnackbarClose} id="x">
-            x
-          </button>
-          {nickname}님, 환영합니다.
+          <img src="/check.svg" />
+          <p>{nickname}님, 환영합니다.</p>
         </div>
       )}
     </>

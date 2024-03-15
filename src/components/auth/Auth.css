@@ -127,15 +127,25 @@
 }
 
 .snackbar {
-  position: fixed;
+  position: absolute;
   bottom: 40px;
   left: 40px;
-  background-color: green;
-  color: white;
-  padding: 15px;
-  border-radius: 10px;
+  background-color: #d9d9d9;
+  color: black;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  width: 548px;
+  height: 63px;
+}
+
+.snackbar > p {
+  width: 548px;
+  height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
-  width: 260px;
 }
 
 .snackbar button#x {

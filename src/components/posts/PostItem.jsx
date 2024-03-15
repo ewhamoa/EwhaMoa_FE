@@ -35,9 +35,17 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub, is
       )}
       <div className="align-column">
         {isClub ? (
-          <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} id="item-img" />
+          <img
+            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/${postId}.jpg`}
+            alt={`club${postId}`}
+            id="item-img"
+          />
         ) : (
-          <img src={`/club-img/conf${postId}.jpg`} alt={`conf${postId}`} id="item-img" />
+          <img
+            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/conf${postId}.jpg`}
+            alt={`conf${postId}`}
+            id="item-img"
+          />
         )}
         <div id="item-text">
           <h3>{title}</h3>

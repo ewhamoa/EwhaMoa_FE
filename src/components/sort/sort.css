@@ -64,6 +64,7 @@
 
 .selected {
   background-color: #37e0bf;
+  color: white;
 }
 
 #search-major > #search-box {

@@ -21,6 +21,7 @@ export function Chatbot() {
   const handleSelectedValue = value => {
     setSelectedValue(value);
     setSent(false);
+    addElement();
   };
 
   const [posts, setPosts] = useState('');
@@ -64,6 +65,35 @@ export function Chatbot() {
     setModalOpen(true);
   };
 
+  const [elements, setElements] = useState([]);
+
+  // 새로운 요소를 추가하는 함수
+
+  const renderChatElements = () => {
+    return (
+      <>
+        {selectedValue === 0 ? (
+          <Recommend
+            key={selectedValue}
+            inputValue={message}
+            posts={posts}
+            sent={sent}
+            onSelect={handleSelectedValue}
+          />
+        ) : selectedValue === 1 ? (
+          <Ask key={selectedValue} message={message} posts={posts} sent={sent} onSelect={handleSelectedValue} />
+        ) : selectedValue === 2 ? (
+          <Instruction key={selectedValue} message={message} posts={posts} sent={sent} onSelect={handleSelectedValue} />
+        ) : null}
+      </>
+    );
+  };
+
+  const addElement = () => {
+    // 현재 요소 배열을 복사하여 새로운 요소를 추가합니다.
+    setElements(prevElements => [...prevElements, renderChatElements()]);
+  };
+
   useEffect(() => {
     scrollToBottomOfModal(); // 모달이 열릴 때마다 맨 아래로 스크롤
     const handleOutsideClick = event => {
@@ -77,7 +107,7 @@ export function Chatbot() {
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [messageType]);
+  }, [renderChatElements()]);
 
   return (
     <div id="chatbot">
@@ -86,28 +116,10 @@ export function Chatbot() {
         <div id="select-modal" ref={modalRef}>
           <div id="chat-container">
             <div>
-              <SelectChat onSelect={setSelectedValue} greetings={true} />
+              <SelectChat onSelect={handleSelectedValue} greetings={true} />
             </div>
-
-            {selectedValue === 0 ? (
-              <Recommend
-                key={selectedValue}
-                inputValue={message}
-                posts={posts}
-                sent={sent}
-                onSelect={setSelectedValue}
-              />
-            ) : selectedValue === 1 ? (
-              <Ask key={selectedValue} message={message} posts={posts} sent={sent} onSelect={setSelectedValue} />
-            ) : selectedValue === 2 ? (
-              <Instruction
-                key={selectedValue}
-                message={message}
-                posts={posts}
-                sent={sent}
-                onSelect={setSelectedValue}
-              />
-            ) : null}
+            {elements}
+            {renderChatElements()}
           </div>
 
           {errorM ? (

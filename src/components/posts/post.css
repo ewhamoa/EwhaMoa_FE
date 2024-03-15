@@ -55,13 +55,14 @@
 
 #item-text > h3 {
   margin-bottom: 5px;
+  margin-top: 15px;
   font-size: 20px;
   height: 4ch;
   overflow: hidden;
 }
 
 #item-body {
-  height: 4ch;
+  height: 4.2ch;
   padding-top: 0;
   overflow: hidden;
   font-size: 12px;
@@ -94,6 +95,9 @@
 #date {
   font-size: 16px;
   color: #989898;
+  height: 38px;
+  display: flex;
+  align-items: center;
 }
 
 #detail-title {
@@ -106,11 +110,12 @@
 
 #title-dday > .badge {
   position: initial;
+  margin-top: 5px;
 }
 
 #title-dday {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 3px;
 }
 

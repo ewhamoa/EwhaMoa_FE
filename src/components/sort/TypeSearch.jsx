@@ -15,7 +15,7 @@ export function TypeSearch({ value, onChange }) {
     <div>
       <div id="search-major">
         <div id="search-box">
-          <img src="/search-major.svg" />
+          <img src="/searchmajor.svg" id="major-img" />
           <input
             type="text"
             placeholder="찾으시는 검색어를 입력해 보세요"

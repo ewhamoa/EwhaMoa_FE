@@ -128,3 +128,9 @@ body {
   display: flex;
   justify-content: center;
 }
+
+#load {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
