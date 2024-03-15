@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './post.css';
 import { ClubType, Subject, Topic } from '../sort';
+import { calculateDday } from './Date';
+import Linkify from 'linkify-react';
 
 export function PostDetail({ postId, isClub, link }) {
   const [posts, setPosts] = useState('');
@@ -46,31 +48,48 @@ export function PostDetail({ postId, isClub, link }) {
     return item ? item.topic : null;
   }
 
+  function findWho(who) {
+    if (who === 1) {
+      return '24학번';
+    } else if (who === 2) {
+      return '24학번, 23학번';
+    } else if (who === 3) {
+      return '24학번, 23학번, 22학번';
+    } else if (who === 4) {
+      return '누구나';
+    } else {
+      return '23학번 이상';
+    }
+  }
+
   return (
     <div className="align-column">
       <div className="align-row">
-        <div className="align-column" id="category">
-          <h3>{posts.title}</h3>
-          <div className="align-row">
+        <div className="align-column">
+          <div id="title-dday" className="align-row">
+            <h3 id="detail-title">{posts.title}</h3>
+            <p className="badge">D-{calculateDday(posts.due)}</p>
+          </div>
+          <div className="align-row" id="category">
             <p>{posts.groupName}</p>
             <p>|</p>
             <p>{findType(posts.affiliationType)}</p>
             <p>|</p>
             <p>{isClub ? '동아리' : '학회'}</p>
             <p>|</p>
-            <p>{posts.grade}</p>
+            <p>{findWho(posts.grade)}</p>
             <p>|</p>
             <p>{isClub ? findSubject(posts.topic) : findTopic(posts.topic)}</p>
           </div>
         </div>
         <Link to={`${link}`} target="_blank">
-          <button>지원하기</button>
+          <button id="detail-button">지원하기</button>
         </Link>
       </div>
-      <p>{posts.body}</p>
+      <pre id="detail-body">
+        <Linkify>{posts.body}</Linkify>
+      </pre>
       <div className="align-row">
-        <p>{posts.createdAt}</p>
-
         {isClub ? (
           <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} />
         ) : (

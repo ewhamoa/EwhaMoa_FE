@@ -1,5 +1,6 @@
 import { ClubType, Majors, Dept } from './sort.const';
 import { useState, useEffect, useRef } from 'react';
+import { TypeSearch } from './TypeSearch';
 import './sort.css';
 
 export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
@@ -58,6 +59,15 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
     }
   }, [selectedType]);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchChange = event => {
+    const value = event.target.value;
+    setSearchTerm(value);
+  };
+
+  const FilteredMajor = Majors.filter(major => (searchTerm !== '' ? major.includes(searchTerm) : true));
+
   return (
     <div>
       <div onClick={showModal} className="align-row" id="dropdown">
@@ -79,8 +89,9 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
 
           {selectedType === 1 ? (
             <div id="line">
+              <TypeSearch value={searchTerm} onChange={handleSearchChange} />
               <div id="select-list">
-                {Majors.map(major => (
+                {FilteredMajor.map(major => (
                   <div
                     onClick={() => handleMajorTypeClick(major)}
                     className={selectedMajor === major ? 'selected' : ''}

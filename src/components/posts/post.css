@@ -38,10 +38,15 @@
   cursor: pointer;
 }
 
+#post-item > #modal-wrap {
+  cursor: default;
+}
+
 #item-img {
   height: 281px;
   width: 281px;
   border-radius: 20px 20px 0px 0px;
+  object-fit: cover;
 }
 
 #item-text {
@@ -89,4 +94,57 @@
 #date {
   font-size: 16px;
   color: #989898;
+}
+
+#detail-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  margin-right: 10px;
+  max-width: 750px;
+}
+
+#title-dday > .badge {
+  position: initial;
+}
+
+#title-dday {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+#detail-modal > .align-column > .align-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: #989898 1px solid;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+#detail-modal > .align-column {
+  width: 1084px;
+}
+
+#category {
+  gap: 3px;
+  color: #5d5d5d;
+  font-size: 20px;
+}
+
+#detail-button {
+  width: 200px;
+  height: 63px;
+  font-size: 24px;
+}
+
+#detail-body {
+  background-color: #eeeeee;
+  padding: 30px;
+  border-radius: 20px;
+  font-size: 24px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Inter';
 }

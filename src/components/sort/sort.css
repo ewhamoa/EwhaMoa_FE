@@ -36,6 +36,7 @@
   padding-top: 10px;
   max-height: 400px;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 #select-list {
@@ -63,4 +64,21 @@
 
 .selected {
   background-color: #37e0bf;
+}
+
+#search-major > #search-box {
+  width: 95%;
+  height: 58px;
+  border: 1px #989898 solid;
+}
+
+#search-major > #search-box > input {
+  width: 80%;
+  height: 58px;
+  font-size: 20px;
+}
+
+#search-major > #search-box > img {
+  padding-left: 15px;
+  padding-right: 10px;
 }
