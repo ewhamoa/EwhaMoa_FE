@@ -12,7 +12,7 @@ function App() {
     if (userId !== null) {
       setLoggedIn(true);
     } else {
-      setLoggedIn(false);
+      setLoggedIn(true);
     }
   }, [userId, loggedIn]);
 
