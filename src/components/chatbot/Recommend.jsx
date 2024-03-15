@@ -38,7 +38,7 @@ export function Recommend({ inputValue, sent, setSent, posts, onSelect, onMessag
             <div id="response">{inputValue}</div>
           </div>
 
-          <div>
+          <div id="chatbot-detail">
             <img src="/moa.webp" id="profile" />
             <p id="moa">이런 공고는 어떠세요?</p>
             {posts === undefined ? (

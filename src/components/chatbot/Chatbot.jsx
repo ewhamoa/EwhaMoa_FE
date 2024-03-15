@@ -65,6 +65,10 @@ export function Chatbot() {
     setModalOpen(true);
   };
 
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
   const [elements, setElements] = useState([]);
 
   // 새로운 요소를 추가하는 함수
@@ -111,7 +115,8 @@ export function Chatbot() {
 
   return (
     <div id="chatbot">
-      <img src="/moa.webp" alt="moA" onClick={handleModalOpen} />
+      {!modalOpen ? <img src="/moa.webp" alt="moA" onClick={handleModalOpen} /> : null}
+      {modalOpen ? <img src="/close.svg" alt="moA" onClick={handleModalClose} /> : null}
       {modalOpen && (
         <div id="select-modal" ref={modalRef}>
           <div id="chat-container">

@@ -94,11 +94,13 @@ export function PostDetail({ postId, isClub, link }) {
           <img
             src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/${postId}.jpg`}
             alt={`club${postId}`}
+            id="detail-img"
           />
         ) : (
           <img
             src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/conf${postId}.jpg`}
             alt={`conf${postId}`}
+            id="detail-img"
           />
         )}
       </div>
