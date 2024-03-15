@@ -9,7 +9,7 @@ export function Header({ isClub, onSearch, searchClear }) {
   const handleSearchChange = event => {
     const value = event.target.value;
     setSearchTerm(value);
-    onSearch(value); // 검색어를 ParentComponent로 전달
+    onSearch(value);
   };
   return (
     <div id="header-wrap">

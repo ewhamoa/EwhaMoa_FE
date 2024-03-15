@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { PostDetail } from './PostDetail';
 import { calculateDday, formatDate } from './Date';
 
-export function PostItem({ postId, title, body, createdAt, due, link, isClub }) {
+export function PostItem({ postId, title, body, createdAt, due, link, isClub, isChatbot, groupName }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
@@ -27,10 +27,12 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub }) 
   }, []);
 
   return (
-    <div id="post-item" onClick={showModal}>
-      <div className="badge">
-        <p>D-{calculateDday(due)}</p>
-      </div>
+    <div id={isChatbot ? 'chatbot-item' : 'post-item'} onClick={showModal}>
+      {!isChatbot && (
+        <div className="badge">
+          <p>D-{calculateDday(due)}</p>
+        </div>
+      )}
       <div className="align-column">
         {isClub ? (
           <img src={`/club-img/${postId}.jpg`} alt={`club${postId}`} id="item-img" />
@@ -39,16 +41,19 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub }) 
         )}
         <div id="item-text">
           <h3>{title}</h3>
+          {isChatbot && <p>{groupName}</p>}
           <p id="item-body">{body}</p>
         </div>
-        <div className="align-row">
-          <p id="date">{formatDate(createdAt)}</p>
-          {link !== null ? (
-            <Link to={`${link}`} target="_blank">
-              <button>지원하기</button>
-            </Link>
-          ) : null}
-        </div>
+        {!isChatbot && (
+          <div className="align-row">
+            <p id="date">{formatDate(createdAt)}</p>
+            {link !== null ? (
+              <Link to={`${link}`} target="_blank">
+                <button>지원하기</button>
+              </Link>
+            ) : null}
+          </div>
+        )}
       </div>
       {modalOpen && (
         <div id="modal-wrap">

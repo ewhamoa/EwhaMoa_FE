@@ -4,6 +4,7 @@ import { SelectChat } from './SelectChat';
 import { Ask } from './Ask';
 import { Recommend } from './Recommend';
 import { Instruction } from './Instruction';
+import { AnythingElse } from './AnythingElse';
 import './chatbot.css';
 
 export function Chatbot() {
@@ -11,7 +12,7 @@ export function Chatbot() {
   const [messageType, setMessageType] = useState();
 
   useEffect(() => {
-    setMessageType(selectedValue); // selectedValue 변경 시에 messageType 갱신
+    setMessageType(selectedValue);
   }, [selectedValue]);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,15 +40,17 @@ export function Chatbot() {
     }));
   };
 
+  const [errorM, setErrorM] = useState(false);
+
   async function fetchPosts() {
     try {
       const response = await axios.post('/chat/send', { messageType, message });
       console.log(response.data);
-      setPosts(response);
+      setPosts(response.data);
       setSent(true);
     } catch (error) {
-      console.error('Error fetching posts:', error);
-      setSent(true);
+      console.log(error.response.data);
+      setErrorM(error.response.data === '답변 생성에 실패했습니다.');
     }
   }
 
@@ -83,17 +86,36 @@ export function Chatbot() {
         <div id="select-modal" ref={modalRef}>
           <div id="chat-container">
             <div>
-              <SelectChat onSelect={handleSelectedValue} greetings={true} />
+              <SelectChat onSelect={setSelectedValue} greetings={true} />
             </div>
 
             {selectedValue === 0 ? (
-              <Recommend inputValue={message} posts={posts} sent={sent} />
+              <Recommend
+                key={selectedValue}
+                inputValue={message}
+                posts={posts}
+                sent={sent}
+                onSelect={setSelectedValue}
+              />
             ) : selectedValue === 1 ? (
-              <Ask message={message} posts={posts} sent={sent} />
+              <Ask key={selectedValue} message={message} posts={posts} sent={sent} onSelect={setSelectedValue} />
             ) : selectedValue === 2 ? (
-              <Instruction message={message} posts={posts} sent={sent} />
+              <Instruction
+                key={selectedValue}
+                message={message}
+                posts={posts}
+                sent={sent}
+                onSelect={setSelectedValue}
+              />
             ) : null}
           </div>
+
+          {errorM ? (
+            <>
+              <p id="moa">답변 생성에 실패했습니다.</p>{' '}
+              <AnythingElse message={message} posts={posts} sent={sent} onSelect={handleSelectedValue} />
+            </>
+          ) : null}
 
           <div id="chat-input">
             <input

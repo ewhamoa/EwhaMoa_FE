@@ -44,9 +44,9 @@ export const Register = () => {
       const response = await axios.post('/signup', formData);
 
       setIsSnackbarOpen(true);
-      sessionStorage.setItem('userId', response.userId);
+      sessionStorage.setItem('userId', response.data.userId);
       sessionStorage.setItem('IsRegistered', true);
-      setNick(response.nickname);
+      setNick(response.data.nickname);
 
       setTimeout(() => {
         setIsSnackbarOpen(false);

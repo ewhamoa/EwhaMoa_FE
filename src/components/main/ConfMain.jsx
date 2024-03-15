@@ -117,6 +117,7 @@ export function ConfMain() {
                         : null
                 }
                 isClub={isClub}
+                isChatbot={false}
               />
             ))
           ) : (

@@ -122,6 +122,7 @@ export function ClubMain() {
                         : null
                 }
                 isClub={isClub}
+                isChatbot={false}
               />
             ))
           ) : (

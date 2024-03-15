@@ -148,3 +148,14 @@
   word-wrap: break-word;
   font-family: 'Inter';
 }
+
+#chatbot-item {
+  width: 281px;
+  height: fit-content;
+  border: #d9d9d9 solid 1px;
+  border-radius: 20px;
+  position: relative;
+  margin: 10px;
+  margin-top: 40px;
+  cursor: pointer;
+}
