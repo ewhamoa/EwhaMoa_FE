@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { TypeSearch } from './TypeSearch';
 import './sort.css';
 
-export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
+export function TypeSort({ onSelect, onMajorSelect }) {
   const [selectedType, setSelectedType] = useState('');
   const [selectedMajor, setSelectedMajor] = useState('');
 
@@ -68,10 +68,22 @@ export function TypeSort({ onSelect, onMajorSelect, onDeptSelect }) {
 
   const FilteredMajor = Majors.filter(major => (searchTerm !== '' ? major.includes(searchTerm) : true));
 
+  function findType(type) {
+    const item = ClubType.find(item => item.id === type);
+    return item ? item.type : null;
+  }
+
   return (
     <div>
-      <div onClick={showModal} className="align-row" id="dropdown">
-        <p>소속</p> <img src="/arrow.svg" />
+      <div onClick={showModal} className="align-row" id={modalOpen ? 'selected-dd' : 'dropdown'}>
+        {selectedType === '' ? (
+          <p>소속</p>
+        ) : selectedMajor === '' ? (
+          <p>{findType(selectedType)}</p>
+        ) : (
+          <p>{selectedMajor}</p>
+        )}{' '}
+        <img src="/arrow.svg" />
       </div>
       {modalOpen && (
         <div ref={modalRef} id="select-modal">

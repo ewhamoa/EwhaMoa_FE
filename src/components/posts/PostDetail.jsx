@@ -8,6 +8,9 @@ import Linkify from 'linkify-react';
 
 export function PostDetail({ postId, isClub, link }) {
   const [posts, setPosts] = useState('');
+  const [bookmarked, setBookmark] = useState(false);
+
+  const currentUserId = sessionStorage.getItem('userId');
 
   useEffect(() => {
     async function fetchPosts() {
@@ -32,6 +35,24 @@ export function PostDetail({ postId, isClub, link }) {
 
     fetchPosts();
   }, [isClub, postId, posts.postId]);
+
+  async function Bookmark() {
+    if (isClub) {
+      try {
+        const response = await axios.post(`/main/club/${postId}/bookmark`, currentUserId);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    } else {
+      try {
+        const response = await axios.post(`/main/conference/${postId}/bookmark`, currentUserId);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    }
+  }
 
   function findType(type) {
     const item = ClubType.find(item => item.id === type);
@@ -82,6 +103,7 @@ export function PostDetail({ postId, isClub, link }) {
             <p>{isClub ? findSubject(posts.topic) : findTopic(posts.topic)}</p>
           </div>
         </div>
+        <img src="/" onClick={Bookmark} id="bookmark" />
         <Link to={`${link}`} target="_blank">
           <button id="detail-button">지원하기</button>
         </Link>

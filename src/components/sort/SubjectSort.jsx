@@ -39,10 +39,15 @@ export function SubjectSort({ onSelect }) {
     setModalOpen(true);
   };
 
+  function findSubject(subject) {
+    const item = Subject.find(item => item.id === subject);
+    return item ? item.sub : null;
+  }
+
   return (
     <div>
-      <div onClick={showModal} className="align-row" id="dropdown">
-        <p>주제</p>
+      <div onClick={showModal} className="align-row" id={modalOpen ? 'selected-dd' : 'dropdown'}>
+        {selectedType === '' ? <p>주제</p> : <p>{findSubject(selectedType)}</p>}
         <img src="/arrow.svg" />
       </div>
       {modalOpen && (

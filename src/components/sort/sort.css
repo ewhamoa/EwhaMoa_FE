@@ -1,7 +1,22 @@
 #dropdown {
   width: 240px;
   height: 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#selected-dd {
+  width: 240px;
+  height: 20px;
+  border: 2px solid #16a085;
   border-radius: 20px;
   padding: 20px;
   align-items: center;

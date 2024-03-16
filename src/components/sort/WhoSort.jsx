@@ -39,10 +39,15 @@ export function WhoSort({ onSelect }) {
     setModalOpen(true);
   };
 
+  function findWho(who) {
+    const item = Who.find(item => item.id === who);
+    return item ? item.who : null;
+  }
+
   return (
     <div>
-      <div onClick={showModal} className="align-row" id="dropdown">
-        <p>모집 대상</p> <img src="/arrow.svg" />
+      <div onClick={showModal} className="align-row" id={modalOpen ? 'selected-dd' : 'dropdown'}>
+        {selectedType === '' ? <p>모집 대상</p> : <p>{findWho(selectedType)}</p>} <img src="/arrow.svg" />
       </div>
       {modalOpen && (
         <div ref={modalRef} id="select-modal">

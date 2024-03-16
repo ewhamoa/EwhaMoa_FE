@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Topic } from './sort.const';
+import { Topic, Majors } from './sort.const';
 
 export function TopicSort({ onSelect }) {
   const [selectedType, setSelectedType] = useState('');
@@ -39,10 +39,15 @@ export function TopicSort({ onSelect }) {
     setModalOpen(true);
   };
 
+  function findTopic(topic) {
+    const item = Topic.find(item => item.id === topic);
+    return item ? item.topic : null;
+  }
+
   return (
     <div>
-      <div onClick={showModal} className="align-row" id="dropdown">
-        <p>주제</p>
+      <div onClick={showModal} className="align-row" id={modalOpen ? 'selected-dd' : 'dropdown'}>
+        {selectedType === '' ? <p>주제</p> : <p>{findTopic(selectedType)}</p>}
         <img src="/arrow.svg" />
       </div>
       {modalOpen && (

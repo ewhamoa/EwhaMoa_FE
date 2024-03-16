@@ -108,7 +108,7 @@ export function ConfMain() {
                 key={postId}
                 postId={postId}
                 title={title}
-                text={body}
+                body={body}
                 createdAt={createdAt}
                 due={due}
                 link={
