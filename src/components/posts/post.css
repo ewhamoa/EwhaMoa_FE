@@ -177,3 +177,8 @@
   margin-top: 50px;
   width: 1180px;
 }
+
+#disabled {
+  cursor: default;
+  background-color: #ccc;
+}

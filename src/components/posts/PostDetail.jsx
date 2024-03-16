@@ -36,11 +36,14 @@ export function PostDetail({ postId, isClub, link }) {
     fetchPosts();
   }, [isClub, postId, posts.postId]);
 
+  const [isWriter, setIsWriter] = useState(false);
+
   async function Bookmark() {
     if (isClub) {
       try {
         const response = await axios.post(`/main/club/${postId}/bookmark`, currentUserId);
         console.log(response.data);
+        setIsWriter(currentUserId === response.data.userId);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -48,6 +51,7 @@ export function PostDetail({ postId, isClub, link }) {
       try {
         const response = await axios.post(`/main/conference/${postId}/bookmark`, currentUserId);
         console.log(response.data);
+        setIsWriter(currentUserId === response.data.userId);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -83,6 +87,28 @@ export function PostDetail({ postId, isClub, link }) {
     }
   }
 
+  async function handleDelete() {
+    if (isClub) {
+      try {
+        const response = await axios.delete(`/main/club/${postId}/delete`);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    } else {
+      try {
+        const response = await axios.delete(`/main/conference/${postId}/delete`);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    }
+  }
+
+  function handleEdit() {
+    <PostDetail posts={posts} />;
+  }
+
   return (
     <div className="align-column">
       <div className="align-row">
@@ -103,6 +129,11 @@ export function PostDetail({ postId, isClub, link }) {
             <p>{isClub ? findSubject(posts.topic) : findTopic(posts.topic)}</p>
           </div>
         </div>
+        {isWriter && (
+          <div id="align-row">
+            <p onClick={handleEdit}>수정</p> <p onClick={handleDelete}>삭제</p>
+          </div>
+        )}
         <img src="/" onClick={Bookmark} id="bookmark" />
         <Link to={`${link}`} target="_blank">
           <button id="detail-button">지원하기</button>
@@ -112,19 +143,7 @@ export function PostDetail({ postId, isClub, link }) {
         <Linkify>{posts.body}</Linkify>
       </pre>
       <div className="align-row">
-        {isClub ? (
-          <img
-            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/${postId}.jpg`}
-            alt={`club${postId}`}
-            id="detail-img"
-          />
-        ) : (
-          <img
-            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/conf${postId}.jpg`}
-            alt={`conf${postId}`}
-            id="detail-img"
-          />
-        )}
+        <img src={posts.imageLink} alt={`${postId}`} id="detail-img" />
       </div>
     </div>
   );

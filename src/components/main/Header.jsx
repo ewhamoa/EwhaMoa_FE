@@ -2,6 +2,7 @@ import { Logo } from './Logo';
 import { Link } from 'react-router-dom';
 import { SearchBar } from './SearchBar';
 import { useState } from 'react';
+import { Profile } from '../mypage';
 
 export function Header({ isClub, onSearch, searchClear }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,14 +17,17 @@ export function Header({ isClub, onSearch, searchClear }) {
       <div className="space-between">
         <div id="header">
           <Logo />
-          <Link to="/conference" className="category" id={isClub ? null : 'underline'}>
+          <Link to="/conference" className="category" id={isClub ? null : isClub === undefined ? null : 'underline'}>
             학회
           </Link>
           <Link to="/club" className="category" id={isClub ? 'underline' : null}>
             동아리
           </Link>
         </div>
-        <SearchBar value={searchTerm} onChange={handleSearchChange} searchClear={searchClear} />
+        <div className="align-row" id="profile-search">
+          <SearchBar value={searchTerm} onChange={handleSearchChange} searchClear={searchClear} />
+          <Profile />
+        </div>
       </div>
     </div>
   );

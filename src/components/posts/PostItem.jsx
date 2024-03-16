@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { PostDetail } from './PostDetail';
 import { calculateDday, formatDate } from './Date';
 
-export function PostItem({ postId, title, body, createdAt, due, link, isClub, isChatbot, groupName }) {
+export function PostItem({ postId, title, body, createdAt, due, link, isClub, isChatbot, groupName, imageLink }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
@@ -34,19 +34,8 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub, is
         </div>
       )}
       <div className="align-column">
-        {isClub ? (
-          <img
-            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/${postId}.jpg`}
-            alt={`club${postId}`}
-            id="item-img"
-          />
-        ) : (
-          <img
-            src={`https://ewhamoa-image-bucket.s3.ap-northeast-2.amazonaws.com/image/conf${postId}.jpg`}
-            alt={`conf${postId}`}
-            id="item-img"
-          />
-        )}
+        <img src={imageLink} alt={`${postId}`} id="item-img" />
+
         <div id="item-text">
           <h3>{title}</h3>
           {isChatbot && <p>{groupName}</p>}
@@ -59,7 +48,11 @@ export function PostItem({ postId, title, body, createdAt, due, link, isClub, is
               <Link to={`${link}`} target="_blank">
                 <button>지원하기</button>
               </Link>
-            ) : null}
+            ) : (
+              <button disabled id="disabled">
+                지원하기
+              </button>
+            )}
           </div>
         )}
       </div>

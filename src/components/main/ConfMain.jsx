@@ -103,7 +103,7 @@ export function ConfMain() {
               <img src="/loading.gif" />
             </div>
           ) : filterData().length !== 0 ? (
-            filterData()?.map(({ postId, title, body, createdAt, due }) => (
+            filterData()?.map(({ postId, title, body, createdAt, due, imageLink }) => (
               <PostItem
                 key={postId}
                 postId={postId}
@@ -122,6 +122,7 @@ export function ConfMain() {
                 }
                 isClub={isClub}
                 isChatbot={false}
+                imageLink={imageLink}
               />
             ))
           ) : (

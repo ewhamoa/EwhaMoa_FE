@@ -21,6 +21,10 @@ export function SubjectSort({ onSelect }) {
   const [modalOpen, setModalOpen] = useState(false);
   const modalRef = useRef();
 
+  const showModal = () => {
+    setModalOpen(true);
+  };
+
   useEffect(() => {
     const handleOutsideClick = event => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -34,10 +38,6 @@ export function SubjectSort({ onSelect }) {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, []);
-
-  const showModal = () => {
-    setModalOpen(true);
-  };
 
   function findSubject(subject) {
     const item = Subject.find(item => item.id === subject);

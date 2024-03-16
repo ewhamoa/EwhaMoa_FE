@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { TypeSort, WhoSort, TopicSort, SubjectSort } from '../sort';
 import { Header } from '../main';
 
-export function WritePost() {
+export function EditPost(posts) {
+  const [editOpen, setEditOpen] = useState(true);
   const [image, setImage] = useState('');
 
   const [selectedTypeValue, setTypeSelectedValue] = useState('');
@@ -30,20 +31,18 @@ export function WritePost() {
   };
 
   const [inputs, setInputs] = useState({
-    Club: '',
-    groupName: '',
-    title: '',
-    body: '',
-    due: '',
-    affiliationType: selectedTypeValue,
-    affiliationName: selectedMajorValue,
-    topic: selectedSubValue,
-    grade: selectedWhoValue,
-    imageLink: image,
+    groupName: posts.groupName,
+    title: posts.title,
+    body: posts.body,
+    due: posts.due,
+    affiliationType: posts.affiliationType,
+    affiliationName: posts.affiliationName,
+    topic: posts.topic,
+    grade: posts.grade,
+    imageLink: posts.imageLink,
   });
 
-  const { Club, groupName, title, body, due, group, affiliationType, affiliationName, topic, grade, imageLink } =
-    inputs;
+  const { groupName, title, body, due, group, affiliationType, affiliationName, topic, grade, imageLink } = inputs;
   const [file, setFile] = useState(null);
   const handleFileChange = e => {
     setFile(e.target.files[0]);
@@ -63,10 +62,8 @@ export function WritePost() {
       });
       console.log(response.data);
       setImage(response.data.imageLink);
-      // 파일 업로드 성공 처리
     } catch (error) {
       console.error('파일 업로드에 실패했습니다:', error);
-      // 파일 업로드 실패 처리
     }
   };
 
@@ -82,40 +79,68 @@ export function WritePost() {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const isClub = Boolean(Club);
+    if (posts.isClub) {
+      try {
+        const response = await axios.post(`/main/club/${posts.postId}/update`, {
+          groupName,
+          title,
+          body,
+          due,
+          group,
+          affiliationType,
+          affiliationName,
+          topic,
+          grade,
+          imageLink,
+        });
 
-    try {
-      const response = await axios.post('/main/post', {
-        isClub,
-        groupName,
-        title,
-        body,
-        due,
-        group,
-        affiliationType,
-        affiliationName,
-        topic,
-        grade,
-        imageLink,
-      });
+        setInputs({
+          groupName: '',
+          title: '',
+          body: '',
+          due: '',
+          affiliationType: '',
+          affiliationName: '',
+          topic: '',
+          grade: '',
+          imageLink: '',
+        });
 
-      setInputs({
-        Club: '',
-        groupName: '',
-        title: '',
-        body: '',
-        due: '',
-        affiliationType: '',
-        affiliationName: '',
-        topic: '',
-        grade: '',
-        imageLink: '',
-      });
+        setEditOpen(false);
+      } catch (error) {
+        console.error('Error creating post:', error);
+      }
+    } else {
+      try {
+        const response = await axios.post(`/main/conference/${posts.postId}/update`, {
+          groupName,
+          title,
+          body,
+          due,
+          group,
+          affiliationType,
+          affiliationName,
+          topic,
+          grade,
+          imageLink,
+        });
 
-      window.location.href = '/';
-    } catch (error) {
-      console.error('Error creating post:', error);
-      console.log(inputs.due.type);
+        setInputs({
+          groupName: '',
+          title: '',
+          body: '',
+          due: '',
+          affiliationType: '',
+          affiliationName: '',
+          topic: '',
+          grade: '',
+          imageLink: '',
+        });
+
+        setEditOpen(false);
+      } catch (error) {
+        console.error('Error creating post:', error);
+      }
     }
   };
 
@@ -128,16 +153,6 @@ export function WritePost() {
             <h3>홍보글 작성</h3>
             <form onSubmit={handleSubmit} id="recruit-form">
               <div id="flex-row">
-                <div id="flex-col">
-                  <label>동아리</label>
-                  <div>
-                    <input type="radio" name="Club" value={true} onChange={handleInputChange} />
-                  </div>
-                  <label>학회</label>
-                  <div>
-                    <input type="radio" name="Club" value={false} onChange={handleInputChange} />
-                  </div>
-                </div>
                 <div id="flex-col">
                   <label>소속 선택</label>
                   <div>

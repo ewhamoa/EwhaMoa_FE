@@ -46,7 +46,7 @@ export function Recommend({ inputValue, sent, setSent, posts, onSelect, onMessag
                 <img src="/loading.gif" />
               </div>
             ) : posts?.length !== 0 ? (
-              posts?.map(({ groupName, isClub, postId, title }) => (
+              posts?.map(({ groupName, isClub, postId, title, imageLink }) => (
                 <PostItem
                   key={postId}
                   postId={postId}
@@ -54,6 +54,7 @@ export function Recommend({ inputValue, sent, setSent, posts, onSelect, onMessag
                   groupName={groupName}
                   isClub={isClub}
                   isChatbot={true}
+                  imageLink={imageLink}
                 />
               ))
             ) : (

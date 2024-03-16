@@ -134,3 +134,9 @@ body {
   display: flex;
   justify-content: center;
 }
+
+#profile-search {
+  gap: 40px;
+  display: flex;
+  align-items: center;
+}

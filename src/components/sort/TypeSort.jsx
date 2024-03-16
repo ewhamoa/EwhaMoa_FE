@@ -54,9 +54,7 @@ export function TypeSort({ onSelect, onMajorSelect }) {
   };
 
   useEffect(() => {
-    if (selectedType !== 1 || selectedType !== 2) {
-      setSelectedMajor('');
-    }
+    setSelectedMajor('');
   }, [selectedType]);
 
   const [searchTerm, setSearchTerm] = useState('');
