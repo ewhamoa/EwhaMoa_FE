@@ -1,4 +1,4 @@
-#chatbot > img {
+#moa-container > img {
   position: fixed;
   bottom: 50px;
   right: 50px;
@@ -108,5 +108,14 @@
   justify-content: center;
 }
 
-#chatbot-item > #modal-wrap > #detail-modal {
+#hover-text {
+  opacity: 0;
+}
+
+#moa-container:hover > #hover-text {
+  opacity: 1;
+  position: fixed;
+  bottom: 90px;
+  right: 170px;
+  background-color: #16a085;
 }

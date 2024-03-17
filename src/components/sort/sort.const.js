@@ -108,6 +108,14 @@ export const Who = [
   { id: 4, who: '21학번 이상' },
 ];
 
+export const WhoWrite = [
+  { id: 1, who: '24학번' },
+  { id: 2, who: '23학번 이하' },
+  { id: 3, who: '22학번 이하' },
+  { id: 4, who: '누구나' },
+  { id: 5, who: '23학번 이상' },
+];
+
 export const Subject = [
   { id: 1, sub: '공연' },
   { id: 2, sub: '문화' },

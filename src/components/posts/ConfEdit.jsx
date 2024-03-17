@@ -1,13 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { TypeSort, WhoWriteSort, TopicSort, SubjectSort } from '../sort';
 import { Header } from '../main';
 
-export function WritePost() {
-  const [image, setImage] = useState('');
+export function EditConf() {
+  const { postId } = useParams();
+  const [posts, setPosts] = useState({});
 
-  const [selectedTypeValue, setTypeSelectedValue] = useState('');
-  const [selectedMajorValue, setMajorSelectedValue] = useState('');
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await axios.get(`/main/conference/${postId}`);
+        console.log(response.data);
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    }
+
+    fetchPosts();
+  }, [postId]);
+
+  const [image, setImage] = useState(posts.imageLink);
+
+  const [selectedTypeValue, setTypeSelectedValue] = useState(posts.affiliationType);
+  const [selectedMajorValue, setMajorSelectedValue] = useState(posts.affiliationName);
 
   const handleTypeSelectedValue = value => {
     setTypeSelectedValue(value);
@@ -17,36 +35,54 @@ export function WritePost() {
     setMajorSelectedValue(value);
   };
 
-  const [selectedWhoValue, setWhoSelectedValue] = useState('');
+  const [selectedWhoValue, setWhoSelectedValue] = useState(posts.grade);
 
   const handleWhoSelectedValue = value => {
     setWhoSelectedValue(value);
   };
 
-  const [selectedSubValue, setSubSelectedValue] = useState('');
+  const [selectedSubValue, setSubSelectedValue] = useState(posts.topic);
 
   const handleSubSelectedValue = value => {
     setSubSelectedValue(value);
   };
+
+  const [inputs, setInputs] = useState({
+    groupName: posts.groupName,
+    title: posts.title,
+    body: posts.body,
+    due: posts.due,
+    affiliationType: posts.affiliationType,
+    affiliationName: posts.affiliationName,
+    topic: posts.topic,
+    grade: posts.grade,
+    imageLink: posts.imageLink,
+  });
+
+  useEffect(() => {
+    setInputs({
+      groupName: posts.groupName,
+      title: posts.title,
+      body: posts.body,
+      due: posts.due,
+      affiliationType: posts.affiliationType,
+      affiliationName: posts.affiliationName,
+      topic: posts.topic,
+      grade: posts.grade,
+      imageLink: posts.imageLink,
+    });
+    setMajorSelectedValue(posts.affiliationName);
+    setTypeSelectedValue(posts.affiliationType);
+    setSubSelectedValue(posts.topic);
+    setWhoSelectedValue(posts.grade);
+    setImage(posts.imageLink);
+  }, [posts, selectedMajorValue, selectedSubValue, selectedTypeValue, selectedWhoValue]);
 
   const [isClub, setSelectedisClub] = useState(true);
 
   const handleisClubClick = clickedType => {
     setSelectedisClub(clickedType);
   };
-
-  const [inputs, setInputs] = useState({
-    Club: isClub,
-    groupName: '',
-    title: '',
-    body: '',
-    due: '',
-    affiliation_type: selectedTypeValue,
-    affiliation_name: selectedMajorValue,
-    topic: selectedSubValue,
-    grade: selectedWhoValue,
-    imageLink: image,
-  });
 
   const { groupName, title, body, due } = inputs;
   const [file, setFile] = useState(null);
@@ -85,42 +121,35 @@ export function WritePost() {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const Club = Boolean(isClub);
-
     try {
-      const response = await axios.post('/main/post', {
-        Club,
+      const response = await axios.patch(`/main/conference/${posts.postId}/update`, {
         groupName,
         title,
         body,
         due,
-        affiliation_type: selectedTypeValue,
-        affiliation_name: selectedMajorValue,
+        affiliationType: selectedTypeValue,
+        affiliationName: selectedMajorValue,
         topic: selectedSubValue,
         grade: selectedWhoValue,
         imageLink: image,
       });
 
       setInputs({
-        Club: '',
         groupName: '',
         title: '',
         body: '',
         due: '',
-        affiliation_type: '',
-        affiliation_name: '',
+        affiliationType: '',
+        affiliationName: '',
         topic: '',
         grade: '',
         imageLink: '',
       });
-
       window.location.href = '/';
     } catch (error) {
       console.error('Error creating post:', error);
-      console.log(inputs.due.type);
     }
   };
-
   const [dueVisible, setDueVisible] = useState(false);
   const inputRef = useRef(null);
 
@@ -139,7 +168,6 @@ export function WritePost() {
   };
 
   const [selectedFileName, setSelectedFileName] = useState('');
-
   return (
     <>
       <Header />
@@ -147,32 +175,16 @@ export function WritePost() {
         <div className="write-post">
           <div id="write">
             <div id="write-intro">
-              <img src="write-edit.png" />
+              <img src="/write-edit.png" />
               <p>홍보글 작성하기</p>
             </div>
-            <form onSubmit={handleSubmit} id="recruit-form">
+            <form onSubmit={handleSubmit} id="recruit-form" className="align-column">
               <div className="align-row">
                 <div id="flex-col">
                   <h3>구분</h3>
-                  <div id="select-list">
-                    <div
-                      onClick={() => handleisClubClick(true)}
-                      id="select"
-                      style={isClub ? { border: '#16a085 2px solid' } : { border: '#d9d9d9 1px solid' }}>
-                      동아리
-                    </div>
-                    <div
-                      onClick={() => handleisClubClick(false)}
-                      id="select"
-                      style={!isClub ? { border: '#16a085 2px solid' } : { border: '#d9d9d9 1px solid' }}>
-                      학회
-                    </div>
-                  </div>
-                </div>
-                <div id="flex-col">
-                  <h3 id="g-n">동아리명/학회명</h3>
                   <input
                     id="group-name"
+                    style={{ width: '1200px', margin: '0px' }}
                     type="text"
                     name="groupName"
                     value={groupName}
@@ -180,6 +192,7 @@ export function WritePost() {
                     placeholder="동아리/학회명을 입력하세요..."
                   />
                 </div>
+                <div id="flex-col"></div>
               </div>
 
               <div className="align-row" id="filter">
@@ -193,8 +206,7 @@ export function WritePost() {
                 </div>
 
                 <div id="flex-col">
-                  {isClub === true ? <SubjectSort onSelect={handleSubSelectedValue} /> : null}
-                  {isClub === false ? <TopicSort onSelect={handleSubSelectedValue} /> : null}
+                  <TopicSort onSelect={handleSubSelectedValue} />
                 </div>
 
                 <div id="flex-col">

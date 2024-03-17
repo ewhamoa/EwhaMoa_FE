@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import { Login, Register, ClubMain, ConfMain, WritePost, Bookmarks, MyPosts } from './components';
+import { Login, Register, ClubMain, ConfMain, WritePost, Bookmarks, MyPosts, EditPost, EditConf } from './components';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -35,6 +35,8 @@ function App() {
         <Route path="/write" element={<WritePost />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="/myposts" element={<MyPosts />} />
+        <Route path="/edit/club/:postId" element={<EditPost />} />
+        <Route path="/edit/conference/:postId" element={<EditConf />} />
       </Routes>
     </div>
   );

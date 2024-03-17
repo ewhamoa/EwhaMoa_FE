@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './mypage.css';
 
 export function Profile() {
   const [modalOpen, setModalOpen] = useState(false);
   const modalRef = useRef();
   const [profile, setProfile] = useState('');
 
-  async function fetchPosts() {
+  async function fetchProfile() {
     try {
       const response = await axios.get('/user/profile');
       console.log(response.data);
@@ -19,6 +20,7 @@ export function Profile() {
 
   const showModal = () => {
     setModalOpen(true);
+    fetchProfile();
   };
 
   useEffect(() => {
@@ -36,23 +38,28 @@ export function Profile() {
   }, []);
 
   return (
-    <div>
-      <img src="/profile-pic.png" onClick={showModal} />
-      <p>{profile.email}</p>
-      <p>{profile.nickname}</p>
+    <div id="profile-wrap">
+      <img src="/profile-pic.png" onClick={showModal} id="prof-pic" />
+
       {modalOpen && (
-        <div id="select-modal" ref={modalRef}>
-          <div id="profile">
+        <div id="profile-modal" ref={modalRef}>
+          <div id="profile2" className="align-row">
             <img src="/profile-pic.png" />
+            <div className="align-column">
+              <p id="nickname">{profile.nickname}</p>
+              <p id="prof-email">{profile.email}</p>
+            </div>
           </div>
-          <Link to="/bookmarks">
-            <img src="/book.png" />
-            <p>내가 북마크한 글</p>
-          </Link>
-          <Link to="/myposts">
-            <img src="/write.png" />
-            <p>내가 작성한 글</p>
-          </Link>
+          <div id="index">
+            <Link to="/bookmarks" className="align-row" id="navigate">
+              <img src="/book.png" />
+              <p>내가 북마크한 글</p>
+            </Link>
+            <Link to="/myposts" className="align-row" id="navigate">
+              <img src="/write.png" />
+              <p>내가 작성한 글</p>
+            </Link>
+          </div>
         </div>
       )}
     </div>

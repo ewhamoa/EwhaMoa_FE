@@ -10,7 +10,7 @@ export function Bookmarks() {
       try {
         const response = await axios.get('/user/bookmark');
         console.log(response.data);
-        setPosts(response);
+        setPosts(response.data);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }

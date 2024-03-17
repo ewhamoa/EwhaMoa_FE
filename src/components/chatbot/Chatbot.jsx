@@ -115,7 +115,12 @@ export function Chatbot() {
 
   return (
     <div id="chatbot">
-      {!modalOpen ? <img src="/moa.webp" alt="moA" onClick={handleModalOpen} /> : null}
+      {!modalOpen ? (
+        <div id="moa-container">
+          <img src="/moa.webp" alt="챗봇 모아(moA)" onClick={handleModalOpen} />
+          <p id="hover-text">도와드릴까요?</p>
+        </div>
+      ) : null}
       {modalOpen ? <img src="/close.svg" alt="moA" onClick={handleModalClose} /> : null}
       {modalOpen && (
         <div id="select-modal" ref={modalRef}>

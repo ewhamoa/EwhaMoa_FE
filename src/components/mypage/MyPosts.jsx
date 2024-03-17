@@ -16,17 +16,17 @@ export function MyPosts() {
       }
     }
     fetchPosts();
-  });
+  }, [posts.postId]);
 
   return (
     <div id="item-wrap">
       <div id="items">
-        {posts.data === undefined ? (
+        {posts === undefined ? (
           <div id="load">
             <img src="/loading.gif" />
           </div>
         ) : posts.length !== 0 ? (
-          posts?.map(({ postId, title, body, createdAt, due, isClub }) => (
+          posts?.map(({ postId, title, body, createdAt, due, club, imageLink }) => (
             <PostItem
               key={postId}
               postId={postId}
@@ -34,15 +34,14 @@ export function MyPosts() {
               body={body}
               createdAt={createdAt}
               due={due}
-              link={null}
-              isClub={isClub}
+              link={'disable'}
+              isClub={club}
               isChatbot={false}
+              imageLink={imageLink}
             />
           ))
         ) : (
-          <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
-            아직 게시글이 없습니다.
-          </h1>
+          <img src="/loading.gif" />
         )}
       </div>
     </div>

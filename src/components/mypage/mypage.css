@@ -1,0 +1,48 @@
+#profile-modal {
+  width: 281px;
+  height: 270px;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  right: translateX(-50%); /*456px;*/
+  top: 100px;
+  z-index: 9999;
+  border-radius: 10px;
+}
+
+#profile2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 231px;
+  padding: 25px;
+  border-bottom: 1px #ccc solid;
+}
+
+#nickname {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+#prof-email {
+  font-size: 14px;
+  color: #989898;
+}
+
+#index {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 25px;
+}
+
+#navigate {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}

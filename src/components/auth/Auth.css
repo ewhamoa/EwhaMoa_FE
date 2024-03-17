@@ -183,14 +183,16 @@
   flex-direction: column;
 }
 
-#verify,
-#verify2 {
+.verify,
+.verify2 {
   position: absolute;
   right: 0px;
   top: 0px;
   height: 73px;
   border-radius: 0px 10px 10px 0px;
   font-size: 24px;
+  background-color: #d9d9d9;
+  cursor: not-allowed;
 }
 
 .register-input {
@@ -200,4 +202,9 @@
 
 .register-input > input {
   width: 548px;
+}
+
+#activated {
+  background-color: #16a085;
+  cursor: pointer;
 }

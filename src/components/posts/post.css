@@ -175,10 +175,251 @@
 
 .write-post {
   margin-top: 50px;
-  width: 1180px;
+  width: 1230px;
 }
 
 #disabled {
   cursor: default;
   background-color: #ccc;
+}
+
+#bookmark {
+  background-color: rgb(22, 160, 133, 0.2);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+#detail-button {
+  border: #16a085 3px solid;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  cursor: pointer;
+}
+
+#detail-button > p {
+  color: #16a085;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#detail-button > img {
+  width: 25px;
+}
+
+#write-content {
+  width: 1178px;
+  height: 419px;
+  border-radius: 10px;
+  border: #d9d9d9 2px solid;
+}
+
+#write-title {
+  width: 1178px;
+  height: 60px;
+  border-radius: 10px;
+  border: #d9d9d9 2px solid;
+}
+
+#write-due {
+  border-radius: 20px;
+  border: #d9d9d9 2px solid;
+  font-family: 'Inter';
+  font-size: 24px;
+  width: 280px;
+  height: 64px;
+  padding: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+#flex-col > h3 {
+  font-size: 36px;
+}
+
+#group-name {
+  height: 65px;
+  border-radius: 20px;
+  border: #d9d9d9 2px solid;
+  width: 885px;
+  margin-left: 15px;
+  font-size: 24px;
+  padding: 20px;
+}
+
+#g-n {
+  margin-left: 15px;
+  color: white;
+}
+
+#write-intro {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: #989898 1px solid;
+  padding-bottom: 40px;
+}
+
+#write-intro > p {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+#write-intro > img {
+  width: 58px;
+  height: 58px;
+}
+
+.selected-isclub {
+  border: #16a085 2px solid;
+}
+
+#image-up {
+  display: flex;
+  align-items: baseline;
+}
+
+#image-up > h3 {
+  font-size: 36px;
+}
+
+#image-up > h4 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+#select-file {
+  background-color: white;
+  color: #989898;
+  border: #989898 1px solid;
+  padding: 10px;
+  height: 77px;
+  width: 198px;
+  font-size: 24px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#upload-file {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+#file-name {
+  font-size: 26px;
+  color: #989898;
+}
+
+#write-submit {
+  width: 253px;
+  height: 74px;
+  font-size: 32px;
+  border-radius: 20px;
+}
+
+#write-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+#edit-button {
+  border: 1px solid #989898;
+  border-radius: 30px;
+  width: 117px;
+  height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #989898;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+#delete-button {
+  border-radius: 30px;
+  width: 117px;
+  height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #989898;
+  color: white;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+#delete-modal {
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 9999;
+  width: 600px;
+  border-radius: 20px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+
+  overflow-y: scroll;
+  padding: 50px;
+  scrollbar-width: none;
+}
+
+#edit-delete > #modal-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* 배경색 및 투명도 조정 */
+  z-index: 9999; /* 다른 요소 위에 표시되도록 설정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#delete-modal {
+  font-size: 48px;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#yes,
+#no {
+  font-size: 32px;
+  width: 253px;
+  height: 84px;
+  border-radius: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  margin-top: 50px;
+  border: #989898 2px solid;
+  cursor: pointer;
+}
+
+#yes {
+  color: #989898;
+}
+
+#no {
+  color: white;
+  background-color: #16a085;
 }

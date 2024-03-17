@@ -26,6 +26,9 @@ export function Header({ isClub, onSearch, searchClear }) {
         </div>
         <div className="align-row" id="profile-search">
           <SearchBar value={searchTerm} onChange={handleSearchChange} searchClear={searchClear} />
+          <Link to="/write" id="write-header">
+            새 글 쓰기
+          </Link>
           <Profile />
         </div>
       </div>

@@ -99,7 +99,7 @@ export const Register = () => {
                       placeholder="이메일"
                       onChange={handleChange}
                     />
-                    <button onClick={handleSendCode} id="verify">
+                    <button onClick={handleSendCode} className="verify" id={formData.email !== '' ? 'activated' : ''}>
                       전송
                     </button>
                   </div>
@@ -114,7 +114,7 @@ export const Register = () => {
                       placeholder="인증코드를 입력"
                       onChange={e => setEmailCode(e.target.value)}
                     />
-                    <button onClick={handleVerifyCode} id="verify2">
+                    <button onClick={handleVerifyCode} className="verify" id={emailCode !== '' ? 'activated' : ''}>
                       인증
                     </button>
                   </div>
