@@ -61,13 +61,13 @@ export function Chatbot() {
     }
   }
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  };
+  function handleModalOpen() {
+    return setModalOpen(true);
+  }
 
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
+  function handleModalClose() {
+    return setModalOpen(false);
+  }
 
   const [elements, setElements] = useState([]);
 
@@ -115,42 +115,49 @@ export function Chatbot() {
 
   return (
     <div id="chatbot">
-      {!modalOpen ? (
-        <div id="moa-container">
-          <img src="/moa.webp" alt="챗봇 모아(moA)" onClick={handleModalOpen} />
-          <p id="hover-text">도와드릴까요?</p>
-        </div>
-      ) : null}
-      {modalOpen ? <img src="/close.svg" alt="moA" onClick={handleModalClose} /> : null}
+      <div id="moa-container">
+        {!modalOpen ? (
+          <>
+            <img src="/moa.webp" alt="챗봇 모아(moA)" onClick={handleModalOpen} />
+            <p id="hover-text">도와드릴까요?</p>
+          </>
+        ) : null}{' '}
+        {modalOpen ? (
+          <img id="close" style={{ bottom: '48px' }} src="/close.svg" alt="moA" onClick={handleModalClose} />
+        ) : null}
+      </div>
+
       {modalOpen && (
-        <div id="select-modal" ref={modalRef}>
-          <div id="chat-container">
-            <div>
-              <SelectChat onSelect={handleSelectedValue} greetings={true} />
+        <>
+          <div id="select-modal" ref={modalRef}>
+            <div id="chat-container">
+              <div>
+                <SelectChat onSelect={handleSelectedValue} greetings={true} />
+              </div>
+              {elements}
+              {renderChatElements()}
             </div>
-            {elements}
-            {renderChatElements()}
-          </div>
 
-          {errorM ? (
-            <>
-              <p id="moa">답변 생성에 실패했습니다.</p>{' '}
-              <AnythingElse message={message} posts={posts} sent={sent} onSelect={handleSelectedValue} />
-            </>
-          ) : null}
+            {errorM ? (
+              <>
+                <p id="moa">답변 생성에 실패했습니다.</p>{' '}
+                <AnythingElse message={message} posts={posts} sent={sent} onSelect={handleSelectedValue} />
+              </>
+            ) : null}
 
-          <div id="chat-input">
-            <input
-              id="id"
-              type="text"
-              name="message"
-              placeholder="메세지를 입력하세요"
-              value={message}
-              onChange={handleInputChange}
-            />
-            <img src="/send.svg" onClick={fetchPosts} id="send" />
+            <div id="chat-input">
+              <input
+                id="id"
+                type="text"
+                name="message"
+                placeholder="메세지를 입력하세요"
+                value={message}
+                onChange={handleInputChange}
+              />
+              <img src="/send.svg" onClick={fetchPosts} id="send" />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -176,7 +176,7 @@ export function EditConf() {
           <div id="write">
             <div id="write-intro">
               <img src="/write-edit.png" />
-              <p>홍보글 작성하기</p>
+              <p>홍보글 수정하기</p>
             </div>
             <form onSubmit={handleSubmit} id="recruit-form" className="align-column">
               <div className="align-row">
@@ -257,7 +257,7 @@ export function EditConf() {
               </div>
               <div id="write-bottom">
                 <button type="submit" id="write-submit">
-                  작성하기
+                  수정하기
                 </button>
               </div>
             </form>

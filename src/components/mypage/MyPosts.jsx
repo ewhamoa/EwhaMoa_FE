@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PostItem } from '../posts';
+import { Header } from '../main';
 import axios from 'axios';
 
 export function MyPosts() {
@@ -19,31 +20,34 @@ export function MyPosts() {
   }, [posts.postId]);
 
   return (
-    <div id="item-wrap">
-      <div id="items">
-        {posts === undefined ? (
-          <div id="load">
+    <>
+      <Header />
+      <div id="item-wrap">
+        <div id="items">
+          {posts === undefined ? (
+            <div id="load">
+              <img src="/loading.gif" />
+            </div>
+          ) : posts.length !== 0 ? (
+            posts?.map(({ postId, title, body, createdAt, due, club, imageLink }) => (
+              <PostItem
+                key={postId}
+                postId={postId}
+                title={title}
+                body={body}
+                createdAt={createdAt}
+                due={due}
+                link={'disable'}
+                isClub={club}
+                isChatbot={false}
+                imageLink={imageLink}
+              />
+            ))
+          ) : (
             <img src="/loading.gif" />
-          </div>
-        ) : posts.length !== 0 ? (
-          posts?.map(({ postId, title, body, createdAt, due, club, imageLink }) => (
-            <PostItem
-              key={postId}
-              postId={postId}
-              title={title}
-              body={body}
-              createdAt={createdAt}
-              due={due}
-              link={'disable'}
-              isClub={club}
-              isChatbot={false}
-              imageLink={imageLink}
-            />
-          ))
-        ) : (
-          <img src="/loading.gif" />
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

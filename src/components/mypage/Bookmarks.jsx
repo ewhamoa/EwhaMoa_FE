@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PostItem } from '../posts';
+import { Header } from '../main';
 import axios from 'axios';
 
 export function Bookmarks() {
@@ -20,6 +21,7 @@ export function Bookmarks() {
   }, [posts?.postId]);
   return (
     <div>
+      <Header />
       {posts === undefined ? (
         <div id="load">
           <img src="/loading.gif" />
