@@ -12,6 +12,7 @@
   <a href="https://ewha-moa.vercel.app/">![Static Badge](https://img.shields.io/badge/%EC%B5%9C%EC%A2%85%20%EB%B0%B0%ED%8F%AC%20%EC%84%9C%EB%B2%84-EWHAMOA%20%EC%9D%B4%ED%99%94%EB%AA%A8%EC%95%84-%2316A085?style=for-the-badge&labelColor=%23F4D03F)</a>
 
 </div>
+현재 서버는 닫혀있는 상태입니다.
 
 ## 🌱 소개
 > **이화모아**는 동아리나 학회에 지원하고자 하는 이화인들을 위해 에브리타임에 올라온 동아리 모집글들을 소속, 주제, 가입 가능 학번 등 다양한 필터링을 통한 검색 기능을 제공하는 서비스입니다. 저희 **TEAM 톤온톤**은 모든 이화인이 자신에게 필요한 동아리를 쉽게 찾고, 쉽게 지원하게 되길 소망합니다.
